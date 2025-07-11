@@ -1,16 +1,16 @@
-# ClpProtocol
+# SweetDate Protocol
 
 **TODO: Add description**
 
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `clp_protocol` to your list of dependencies in `mix.exs`:
+by adding `sd_protocol` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:clp_protocol, "~> 0.1.0"}
+    {:sd_protocol, "~> 0.1.0"}
   ]
 end
 ```
