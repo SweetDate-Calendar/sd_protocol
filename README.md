@@ -1,21 +1,88 @@
-# SweetDate Protocol
+# SweetDate Implementation Protocol (SDIP)
 
-**TODO: Add description**
+The **SweetDate Implementation Protocol** defines how clients and servers communicate in the SweetDate ecosystem.  
+It is designed to be **open, versioned, and language-agnostic**, making it easy for developers to integrate calendar functionality across multiple platforms.
 
-## Installation
+This repository is the **authoritative source** for the SDIP specification, proposals, and version history.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `sd_protocol` to your list of dependencies in `mix.exs`:
+---
 
-```elixir
-def deps do
-  [
-    {:sd_protocol, "~> 0.1.0"}
-  ]
-end
+## 📜 Purpose
+
+- Provide a **clear and consistent specification** for SweetDate implementations.
+- Encourage **community-driven development** of the protocol.
+- Maintain a **transparent history** of changes and decisions.
+- Ensure **backward compatibility** and smooth upgrades.
+
+---
+
+## 🛠 How to Contribute
+
+We welcome contributions from **developers, integrators, and stakeholders**.
+
+### 1. Join the Discussion
+- Use the [GitHub Discussions](https://github.com/SweetDate-Calendar/sd_protocol/discussions) to share ideas, report pain points, or ask questions.
+
+### 2. Propose a Change
+We use **SIP (SDIP Improvement Proposal)** documents to propose changes or additions.
+
+1. Open an issue or discussion tagged `proposal`.
+2. Fork the repo and create a new file in `/proposals` named:
+   ```
+   SIP-XXXX-short-title.md
+   ```
+3. Follow the [SIP Template](proposals/SIP-template.md).
+4. Submit a Pull Request for review.
+
+### 3. Review Process
+- The proposal will be discussed publicly.
+- Core maintainers will give feedback and request revisions if needed.
+- Once approved, the change will be merged into the next protocol version.
+
+---
+
+## 📦 Repository Structure
+
+```
+/protocol/           # Finalized, versioned protocol definitions
+    v1.0/
+    v1.1/
+    v2.0/
+/proposals/          # Draft SIP documents under discussion
+    SIP-0001-example.md
+/roadmap.md          # Planned changes and milestones
+/changelog.md        # Summary of changes per version
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/clp_protocol>.
+---
 
+## 🔢 Versioning
+
+We follow **Semantic Versioning**:
+
+- **MAJOR** — Breaking changes (e.g., removing a command, altering payloads)
+- **MINOR** — Backwards-compatible additions (e.g., new commands or fields)
+- **PATCH** — Non-breaking clarifications and fixes
+
+Older versions will be supported according to our [Deprecation Policy](deprecation.md).
+
+---
+
+## 📅 Project Board
+
+We organize protocol development using a [Kanban board](../../projects) to track:
+- Proposals under review
+- Approved changes pending implementation
+- Work in progress
+
+---
+
+## 📣 Stay Updated
+
+- **Watch** this repository for release notifications.
+- Participate in discussions and community calls.
+- Follow announcements on our [documentation site](https://sweetdate-calendar.github.io/sd_docs/).
+
+---
+
+**License:** [MIT](LICENSE)
