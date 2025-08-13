@@ -1,6 +1,8 @@
-# Headless Calendar Protocol
+# SweetDate Implementation Protocol (SDIP) Version 1.0.0 
 
-This document defines the core protocol for interacting with the Chronopipe headless calendar engine over TCP. It is designed to serve as the canonical reference for building and maintaining language-specific client libraries (e.g. Ruby, JavaScript, Elixir), which communicate with the `cp_tcp` module in the `sd_engine` umbrella app.
+This document defines the core protocol for interacting with the SweetDate headless calendar engine over TCP. 
+It is designed to serve as the canonical reference for building and maintaining language-specific client libraries (e.g. Ruby, JavaScript, Elixir),
+which communicate with the `cp_tcp` module in the `sd_engine` umbrella app.
 
 ## Goals
 
