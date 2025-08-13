@@ -48,10 +48,7 @@ We use **SIP (SDIP Improvement Proposal)** documents to propose changes or addit
     v1.0/
     v1.1/
     v2.0/
-/proposals/          # Draft SIP documents under discussion
-    SIP-0001-example.md
-/roadmap.md          # Planned changes and milestones
-/changelog.md        # Summary of changes per version
+
 ```
 
 ---
@@ -64,13 +61,13 @@ We follow **Semantic Versioning**:
 - **MINOR** — Backwards-compatible additions (e.g., new commands or fields)
 - **PATCH** — Non-breaking clarifications and fixes
 
-Older versions will be supported according to our [Deprecation Policy](deprecation.md).
+
 
 ---
 
 ## 📅 Project Board
 
-We organize protocol development using a [Kanban board](../../projects) to track:
+We organize protocol development using a [Kanban board](https://github.com/orgs/SweetDate-Calendar/projects/3/views/1) to track:
 - Proposals under review
 - Approved changes pending implementation
 - Work in progress
@@ -81,8 +78,7 @@ We organize protocol development using a [Kanban board](../../projects) to track
 
 - **Watch** this repository for release notifications.
 - Participate in discussions and community calls.
-- Follow announcements on our [documentation site](https://sweetdate-calendar.github.io/sd_docs/).
+- Follow announcements on our [documentation site](https://github.com/SweetDate-Calendar/sd_engine/discussions).
 
 ---
 
-**License:** [MIT](LICENSE)
