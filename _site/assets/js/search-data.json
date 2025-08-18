@@ -1,0 +1,30 @@
+{"0": {
+    "doc": "Home",
+    "title": "SDIP (SweetDate Implementation Protocol)",
+    "content": ". This document describes the methods supported by SweetDate. It serves as a reference for developers on how to communicate with the engine. Communication is supported through different APIs: . | TCP — for local communication on the same machine | REST — for hosted calendar access | GraphQL — for hosted calendar access with flexible queries | . Note: Currently, only TCP is available. REST and GraphQL endpoints are planned and will be added later. ",
+    "url": "/sd_docs/#sdip-sweetdate-implementation-protocol",
+    
+    "relUrl": "/#sdip-sweetdate-implementation-protocol"
+  },"1": {
+    "doc": "Home",
+    "title": "API Versioning",
+    "content": "We distinguish between: . | SDIP Spec Version — the protocol document version (semantic versioning: MAJOR.MINOR.PATCH), e.g. 1.0.0. | API Version — the runtime version used by clients when calling the engine. Only the MAJOR must match for compatibility. | . ",
+    "url": "/sd_docs/#api-versioning",
+    
+    "relUrl": "/#api-versioning"
+  },"2": {
+    "doc": "Home",
+    "title": "Authorization",
+    "content": "HTTP (REST/GraphQL) . | Base URL: https://sweet_date.io/api-v1/ | Dispatcher route (payload parity with TCP): POST /api-v1/dispatch | Auth headers: . | X-SD-App-Id-Enc: &lt;base64&gt; | X-SD-App-Key: sk_live_... | . | . Example: . POST https://sweet_date.io/api-v1/dispatch X-SD-App-Id-Enc: X-SD-App-Key: sk_live_… { \"cmd”:\"TENANTS.LIST\", \"payload\":{ \"limit\":25, \"offset\":0 } } . TCP . | Connection: persistent TCP socket | Auth included in payload (no headers) | Version field required | . Example: . { \"version\": \"1\", \"app_id_enc\": \"&lt;base64&gt;\", \"app_key\": \"sk_live_...\", \"cmd\": \"TENANTS.LIST\", \"payload\": { \"limit\": 25, \"offset\": 0 } } . ",
+    "url": "/sd_docs/#authorization",
+    
+    "relUrl": "/#authorization"
+  },"3": {
+    "doc": "Home",
+    "title": "Home",
+    "content": " ",
+    "url": "/sd_docs/",
+    
+    "relUrl": "/"
+  }
+}
