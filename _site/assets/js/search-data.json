@@ -2,427 +2,427 @@
     "doc": "Home",
     "title": "SDIP (SweetDate Implementation Protocol)",
     "content": ". This document describes the methods supported by SweetDate. It serves as a reference for developers on how to communicate with the engine. Communication is supported through different APIs: . | TCP — for local communication on the same machine | REST — for hosted calendar access | GraphQL — for hosted calendar access with flexible queries | . Note: Currently, only TCP is available. REST and GraphQL endpoints are planned and will be added later. ",
-    "url": "/sd_docs/#sdip-sweetdate-implementation-protocol",
+    "url": "/sd_protocol/#sdip-sweetdate-implementation-protocol",
     
     "relUrl": "/#sdip-sweetdate-implementation-protocol"
   },"1": {
     "doc": "Home",
     "title": "API Versioning",
     "content": "We distinguish between: . | SDIP Spec Version — the protocol document version (semantic versioning: MAJOR.MINOR.PATCH), e.g. 1.0.0. | API Version — the runtime version used by clients when calling the engine. Only the MAJOR must match for compatibility. | . ",
-    "url": "/sd_docs/#api-versioning",
+    "url": "/sd_protocol/#api-versioning",
     
     "relUrl": "/#api-versioning"
   },"2": {
     "doc": "Home",
     "title": "Home",
     "content": " ",
-    "url": "/sd_docs/",
+    "url": "/sd_protocol/",
     
     "relUrl": "/"
   },"3": {
     "doc": "Basic",
     "title": "What Is a Calendar Backend?",
     "content": "A calendar backend is the engine that powers scheduling, booking, and time management for websites and apps. It doesn’t decide how the site looks or how the booking form is designed. That’s the job of the site developer or theme provider. Instead, the backend takes care of the hard logic: making sure bookings don’t overlap, sending confirmations, handling cancellations, and managing reminders. ",
-    "url": "/sd_docs/99-basic/#what-is-a-calendar-backend",
+    "url": "/sd_protocol/99-basic/#what-is-a-calendar-backend",
     
     "relUrl": "/99-basic/#what-is-a-calendar-backend"
   },"4": {
     "doc": "Basic",
     "title": "Who Handles What?",
     "content": ". | The Bureau / Developer / Theme Provider . | Builds the site or app (e.g., WordPress site, custom React app). | Designs the user experience (forms, buttons, dashboards). | Integrates external services like payment gateways, file storage, and email providers. | Connects the site to SweetDate for calendar logic. | . | SweetDate . | Manages calendars and bookings. | Prevents double-bookings. | Handles invitations, acceptances, cancellations, and rescheduling. | Schedules reminders and notifications. | Supports multi-tenant setups (e.g., one hotel chain with many hotels, each with many rooms and calendars). | . | . Together, these pieces form a complete solution. ",
-    "url": "/sd_docs/99-basic/#who-handles-what",
+    "url": "/sd_protocol/99-basic/#who-handles-what",
     
     "relUrl": "/99-basic/#who-handles-what"
   },"5": {
     "doc": "Basic",
     "title": "Example 1: Hotels",
     "content": ". | Developer builds a hotel booking website. | UX/UI: the bureau designs how users search for rooms, pick dates, and enter payment info. | Payment: handled by Stripe, PayPal, etc. | Calendar backend (SweetDate): . | Tracks which rooms are available. | Saves the booking into the right room’s calendar. | Sends confirmations and schedules reminders. | . | . ",
-    "url": "/sd_docs/99-basic/#example-1-hotels",
+    "url": "/sd_protocol/99-basic/#example-1-hotels",
     
     "relUrl": "/99-basic/#example-1-hotels"
   },"6": {
     "doc": "Basic",
     "title": "Example 2: Tennis Matchmaking",
     "content": ". | Developer builds a community sports site. | UX/UI: the bureau designs player profiles, search, and match requests. | Other services: payments if required (e.g., for court rental). | Calendar backend (SweetDate): . | Player A sends an invitation to Player B. | Player B accepts or declines. | Both calendars are updated. | If canceled, notifications are sent automatically. | . | . ",
-    "url": "/sd_docs/99-basic/#example-2-tennis-matchmaking",
+    "url": "/sd_protocol/99-basic/#example-2-tennis-matchmaking",
     
     "relUrl": "/99-basic/#example-2-tennis-matchmaking"
   },"7": {
     "doc": "Basic",
     "title": "Everyday Calendar Backend Features",
     "content": ". | Multi-tenancy (hotel chain → hotels → rooms → calendars). | Conflict management (no double-bookings). | Invitations, accept/decline, cancellations, rescheduling. | Automated reminders and confirmations. | Full audit trail (who booked, canceled, changed). | . ",
-    "url": "/sd_docs/99-basic/#everyday-calendar-backend-features",
+    "url": "/sd_protocol/99-basic/#everyday-calendar-backend-features",
     
     "relUrl": "/99-basic/#everyday-calendar-backend-features"
   },"8": {
     "doc": "Basic",
     "title": "Why Use a Calendar Backend?",
     "content": "Calendars sound simple — but the logic is hard to build. By offloading calendar complexity to SweetDate, developers and agencies: . | Save time and money. | Deliver reliable, tested booking flows. | Focus on UX, payments, and business features — while SweetDate handles the scheduling engine. | . ",
-    "url": "/sd_docs/99-basic/#why-use-a-calendar-backend",
+    "url": "/sd_protocol/99-basic/#why-use-a-calendar-backend",
     
     "relUrl": "/99-basic/#why-use-a-calendar-backend"
   },"9": {
     "doc": "Basic",
     "title": "Responsibilities Overview",
     "content": "+--------------------+-------------------+--------------------+ | Bureau / Developer | Other Services | SweetDate Backend | +--------------------+-------------------+--------------------+ | - UX / UI design | - Payments | - Booking logic | - Site structure | - File storage | - No double-book | - Integrations | - Email delivery | - Invitations | | - Reminders | +--------------------+-------------------+--------------------+ . This clearly shows boundaries: . | Bureau handles what the user sees. | Other services handle their specialties (payment, email, storage). | SweetDate handles calendars and scheduling logic. | . ",
-    "url": "/sd_docs/99-basic/#responsibilities-overview",
+    "url": "/sd_protocol/99-basic/#responsibilities-overview",
     
     "relUrl": "/99-basic/#responsibilities-overview"
   },"10": {
     "doc": "Basic",
     "title": "SweetDate — A Fundamental Description",
     "content": "SweetDate is a calendar backend. That means it is a system that provides the core logic for managing calendars, bookings, and events. It doesn’t decide how the website looks or how the app works — instead, it provides the engine that developers and businesses can plug into their websites and services. Think of it like electricity: you don’t build your own power plant to light up your house. You connect to the grid. SweetDate is the “calendar grid” for modern websites and apps. ",
-    "url": "/sd_docs/99-basic/#sweetdate--a-fundamental-description",
+    "url": "/sd_protocol/99-basic/#sweetdate--a-fundamental-description",
     
     "relUrl": "/99-basic/#sweetdate--a-fundamental-description"
   },"11": {
     "doc": "Basic",
     "title": "The Players",
     "content": ". | End Users . | The people who want to book something. | Examples: . | A tennis player booking a court. | A client booking time with a lawyer. | A family reserving a spot with a travel agency. | . | . | Businesses &amp; Organizations . | The service providers who need to handle bookings. | Examples: . | The tennis club. | The law office. | The travel agency. | . | . | Web Agencies (Bureaus) . | The developers and designers who build websites for businesses. | They integrate tools like payment systems, storage, email — and SweetDate for calendar features. | Examples in Aarhus: . | Klean | Novicell | 1508 | . | . | Theme Vendors . | Companies or individuals who sell pre-made website templates (e.g., for WordPress). | A theme could already include SweetDate, or the agency could add it afterwards. | SweetDate could also provide its own themes for popular industries (e.g., sports clubs, law firms). | . | . ",
-    "url": "/sd_docs/99-basic/#the-players",
+    "url": "/sd_protocol/99-basic/#the-players",
     
     "relUrl": "/99-basic/#the-players"
   },"12": {
     "doc": "Basic",
     "title": "The Business Model",
     "content": ". | Each site that integrates SweetDate pays for access to the SaaS. | Just like with payment gateways, email providers, or file storage, SweetDate is one of the building blocks that agencies use to deliver a full solution. | . ",
-    "url": "/sd_docs/99-basic/#the-business-model",
+    "url": "/sd_protocol/99-basic/#the-business-model",
     
     "relUrl": "/99-basic/#the-business-model"
   },"13": {
     "doc": "Basic",
     "title": "Why Use SweetDate?",
     "content": ". | Because it’s faster, cheaper, and better than building a booking system from scratch. | Agencies and businesses save time and focus on what makes their service unique. | End users get reliable and easy-to-use booking experiences. | . ",
-    "url": "/sd_docs/99-basic/#why-use-sweetdate",
+    "url": "/sd_protocol/99-basic/#why-use-sweetdate",
     
     "relUrl": "/99-basic/#why-use-sweetdate"
   },"14": {
     "doc": "Basic",
     "title": "Sketch for the Graphic / Diagram",
     "content": "Imagine a layered diagram: . +---------------------------------------------------+ | End Users | (Tennis players, clients, travelers) | +---------------------------------------------------+ │ ▼ +---------------------------------------------------+ | Businesses &amp; Organizations | (Tennis clubs, law firms, travel agencies) | +---------------------------------------------------+ │ ▼ +---------------------------------------------------+ | Web Agencies / Bureaus | (Klean, Novicell, 1508) | - Build websites and apps | - Add Payment Gateway, Storage, Email, | and Calendar Backend (SweetDate) | +---------------------------------------------------+ │ ▼ +---------------------------------------------------+ | SweetDate SaaS | - Calendar logic | - Booking management | - Multi-tenant backend | +---------------------------------------------------+ . 👉 In a more friendly illustration: . | On the left side, little icons of end users (person with tennis racket, businessperson, family with suitcase). | In the middle, logos/buildings for businesses (tennis club, lawyer office, travel agency). | Below them, web agencies shown as designers/developers with laptops. | On the right side, a “cloud” labeled SweetDate connected to the agencies’ work, next to other blocks (payment, email, storage). | . ",
-    "url": "/sd_docs/99-basic/#sketch-for-the-graphic--diagram",
+    "url": "/sd_protocol/99-basic/#sketch-for-the-graphic--diagram",
     
     "relUrl": "/99-basic/#sketch-for-the-graphic--diagram"
   },"15": {
     "doc": "Basic",
     "title": "Basic",
     "content": " ",
-    "url": "/sd_docs/99-basic/",
+    "url": "/sd_protocol/99-basic/",
     
     "relUrl": "/99-basic/"
   },"16": {
     "doc": "Universal Conformance Driver",
     "title": "Universal Conformance Driver",
     "content": "The Universal Conformance Driver is a module in the SweetDate CLI that verifies protocol compliance of language-specific implementations. It runs test manifests that describe expected behavior, and delegates test execution to each implementation under test. ",
-    "url": "/sd_docs/110-conformance-driver/",
+    "url": "/sd_protocol/110-conformance-driver/",
     
     "relUrl": "/110-conformance-driver/"
   },"17": {
     "doc": "Universal Conformance Driver",
     "title": "Purpose",
     "content": "The conformance driver ensures that all language-specific client libraries behave correctly and consistently according to the SweetDate Implementation Protocol (SDIP). It does not test the server itself. Instead, it tests that a client implementation of the protocol can send the correct requests, interpret responses, and handle edge cases as described in the protocol definition. ",
-    "url": "/sd_docs/110-conformance-driver/#purpose",
+    "url": "/sd_protocol/110-conformance-driver/#purpose",
     
     "relUrl": "/110-conformance-driver/#purpose"
   },"18": {
     "doc": "Universal Conformance Driver",
     "title": "How It Works",
     "content": "┌────────────────────────────┐ │ SweetDate CLI Driver │ │ (Conformance Layer) │ └────────────────────────────┘ │ Reads test manifest JSON ▼ ┌───────────────────────┐ │ Language Test Runner │───────┐ │ (Ruby, Elixir, PHP) │ │ └───────────────────────┘ ▼ Executes test cases Validates results │ Reports Pass/Fail . ",
-    "url": "/sd_docs/110-conformance-driver/#how-it-works",
+    "url": "/sd_protocol/110-conformance-driver/#how-it-works",
     
     "relUrl": "/110-conformance-driver/#how-it-works"
   },"19": {
     "doc": "Universal Conformance Driver",
     "title": "Structure",
     "content": "Each test is defined in a manifest JSON file, specifying: . | The command to be tested (e.g. CALENDARS.CREATE) | The parameters to send | The expected request/response behavior | Optional edge case checks (e.g. missing params, rate limits) | . ",
-    "url": "/sd_docs/110-conformance-driver/#structure",
+    "url": "/sd_protocol/110-conformance-driver/#structure",
     
     "relUrl": "/110-conformance-driver/#structure"
   },"20": {
     "doc": "Universal Conformance Driver",
     "title": "Configuration",
     "content": "The sd.config.json file can include a section for conformance testing: . { \"protocol\": \"protocol-version-01/protocol.json\", \"conformance\": { \"runner\": \"ruby\", \"runner_path\": \"out/ruby/test_runner.rb\", \"manifest\": \"tests/protocol_manifest.json\" } } . ",
-    "url": "/sd_docs/110-conformance-driver/#configuration",
+    "url": "/sd_protocol/110-conformance-driver/#configuration",
     
     "relUrl": "/110-conformance-driver/#configuration"
   },"21": {
     "doc": "Universal Conformance Driver",
     "title": "Execution",
     "content": "To run the conformance tests from the CLI: . sd_cli test conformance . This will: . | Load the selected protocol version and manifest | Delegate test execution to the test runner in the selected language | Capture and summarize the results in a final test report | . ",
-    "url": "/sd_docs/110-conformance-driver/#execution",
+    "url": "/sd_protocol/110-conformance-driver/#execution",
     
     "relUrl": "/110-conformance-driver/#execution"
   },"22": {
     "doc": "Universal Conformance Driver",
     "title": "Language-Specific Runners",
     "content": "Each supported language must expose a test_runner CLI interface that accepts a command name and test parameters, then returns a structured JSON result. Example Invocation: . ruby test_runner.rb --command CALENDARS.CREATE --params '{}' . Expected Output (JSON): . { \"status\": \"ok\", \"result\": \"passed\" } . ",
-    "url": "/sd_docs/110-conformance-driver/#language-specific-runners",
+    "url": "/sd_protocol/110-conformance-driver/#language-specific-runners",
     
     "relUrl": "/110-conformance-driver/#language-specific-runners"
   },"23": {
     "doc": "Universal Conformance Driver",
     "title": "Benefits",
     "content": ". | Detect missing or invalid protocol commands in clients | Ensure future versions of the protocol don’t break existing clients | Provide confidence to integrators and end users | . ",
-    "url": "/sd_docs/110-conformance-driver/#benefits",
+    "url": "/sd_protocol/110-conformance-driver/#benefits",
     
     "relUrl": "/110-conformance-driver/#benefits"
   },"24": {
     "doc": "Authorization (HTTP)",
     "title": "SweetDate Authorization (SignatureV1)",
     "content": "This document describes how to authenticate HTTP requests to the SweetDate REST API using SignatureV1 (Ed25519 detached signatures). TL;DR: For every request (except /health), build a small canonical string, sign it with your Ed25519 private key, then send three headers: sd-app-id, sd-timestamp, and sd-signature (base64url, no padding). ",
-    "url": "/sd_docs/10-authorization/#sweetdate-authorization-signaturev1",
+    "url": "/sd_protocol/10-authorization/#sweetdate-authorization-signaturev1",
     
     "relUrl": "/10-authorization/#sweetdate-authorization-signaturev1"
   },"25": {
     "doc": "Authorization (HTTP)",
     "title": "Base URL &amp; Protected Routes",
     "content": ". | Base URL: https://sweetdate.io/api/v1/ | Dispatcher (payload parity with TCP): POST /api/v1/dispatch | Health (no auth required): GET /health | . ",
-    "url": "/sd_docs/10-authorization/#base-url--protected-routes",
+    "url": "/sd_protocol/10-authorization/#base-url--protected-routes",
     
     "relUrl": "/10-authorization/#base-url--protected-routes"
   },"26": {
     "doc": "Authorization (HTTP)",
     "title": "Required Headers",
     "content": "| Header | Description | . | sd-app-id | Your application ID (e.g. app_123…). | . | sd-timestamp | Unix epoch seconds at the time of the request (server allows ±300s). | . | sd-signature | Base64url (no padding) Ed25519 signature of the canonical string. | . ",
-    "url": "/sd_docs/10-authorization/#required-headers",
+    "url": "/sd_protocol/10-authorization/#required-headers",
     
     "relUrl": "/10-authorization/#required-headers"
   },"27": {
     "doc": "Authorization (HTTP)",
     "title": "Canonical String (v1)",
     "content": "Construct the canonical string exactly as follows (5 lines, with \\n newlines): . v1 &lt;METHOD&gt; &lt;PATH_AND_QUERY&gt; &lt;TIMESTAMP&gt; - . Rules . | METHOD is uppercased, e.g., GET, POST. | PATH_AND_QUERY must include the leading slash and query string if present (e.g., /whoami?x=1&amp;y=2). | TIMESTAMP is seconds since epoch (UTC), not milliseconds. | The last line is a literal dash (-) for v1 (no body hash). | . Example: \"v1\\nGET\\n/whoami?x=1&amp;y=2\\n1724071234\\n-\" . ",
-    "url": "/sd_docs/10-authorization/#canonical-string-v1",
+    "url": "/sd_protocol/10-authorization/#canonical-string-v1",
     
     "relUrl": "/10-authorization/#canonical-string-v1"
   },"28": {
     "doc": "Authorization (HTTP)",
     "title": "Signature",
     "content": ". | Algorithm: Ed25519, detached signature over the canonical string bytes. | Encodings: . | Send sd-signature as base64url without padding (- and _ alphabet, strip =). | sd-app-id is your app identifier issued by SweetDate. | . | Server verification steps: . | Validate headers exist and timestamp is within skew (default ±300s). | Resolve your public key by sd-app-id. | Rebuild the canonical string and verify the Ed25519 signature. | . | . ",
-    "url": "/sd_docs/10-authorization/#signature",
+    "url": "/sd_protocol/10-authorization/#signature",
     
     "relUrl": "/10-authorization/#signature"
   },"29": {
     "doc": "Authorization (HTTP)",
     "title": "Example: GET /whoami",
     "content": "Canonical (example ts=1724064000): . v1 GET /whoami 1724064000 - . Example request: . GET https://sweetdate.io/api/v1/whoami sd-app-id: app_7dc655cb-30ee-422f-b13a-f0a796c53879 sd-timestamp: 1724064000 sd-signature: q8W…base64url… . Example response: . { \"status\": \"ok\", \"app_id\": \"app_7dc655cb-30ee-422f-b13a-f0a796c53879\" } . ",
-    "url": "/sd_docs/10-authorization/#example-get-whoami",
+    "url": "/sd_protocol/10-authorization/#example-get-whoami",
     
     "relUrl": "/10-authorization/#example-get-whoami"
   },"30": {
     "doc": "Authorization (HTTP)",
     "title": "Example: POST /api/v1/dispatch",
     "content": "Canonical (example ts=1724064000): . v1 POST /api/v1/dispatch 1724064000 - . Request: . POST https://sweetdate.io/api/v1/dispatch Content-Type: application/json sd-app-id: app_7dc655cb-30ee-422f-b13a-f0a796c53879 sd-timestamp: 1724064000 sd-signature: q8W…base64url… { \"payload\": { \"cmd\": \"TENANTS.LIST\", \"limit\": 25, \"offset\": 0 } } . ",
-    "url": "/sd_docs/10-authorization/#example-post-apiv1dispatch",
+    "url": "/sd_protocol/10-authorization/#example-post-apiv1dispatch",
     
     "relUrl": "/10-authorization/#example-post-apiv1dispatch"
   },"31": {
     "doc": "Authorization (HTTP)",
     "title": "How to Sign (OpenSSL, pure shell)",
     "content": "Works on macOS/Linux with OpenSSL 3+. If you already have an Ed25519 private key, skip to Sign a request. 1) Generate a keypair . # Private key (PEM) openssl genpkey -algorithm ed25519 -out sk.pem # Public key (PEM) openssl pkey -in sk.pem -pubout -out pk.pem . You will register the public key with SweetDate (the server stores 32‑byte Ed25519 public keys). If you need the raw 32‑byte public key (for display or provisioning), you can extract it from the SPKI: . # Extract the last 32 bytes (raw ed25519 public key) and encode as base64url (no padding) openssl pkey -in sk.pem -pubout -outform DER \\ | tail -c 32 \\ | base64 | tr '+/' '-_' | tr -d '=' . 2) Sign a request . BASE_URL=\"https://sweetdate.io\" METHOD=\"GET\" PATH=\"/api/v1/whoami\" # include query if present, e.g. /api/v1/whoami?x=1 TS=$(date +%s) # seconds CANONICAL=$(printf \"v1\\n%s\\n%s\\n%s\\n-\\n\" \"$METHOD\" \"$PATH\" \"$TS\") # Create Ed25519 detached signature (raw mode, no hash) SIG_BIN=$(printf \"%s\" \"$CANONICAL\" | openssl pkeyutl -sign -inkey sk.pem -rawin) # Base64url encode without padding SIG_B64=$(printf \"%s\" \"$SIG_BIN\" | base64 | tr '+/' '-_' | tr -d '=') # Call with curl curl -i \"$BASE_URL$PATH\" \\ -H \"sd-app-id: app_7dc655cb-30ee-422f-b13a-f0a796c53879\" \\ -H \"sd-timestamp: $TS\" \\ -H \"sd-signature: $SIG_B64\" . 3) Dispatch example (POST) . BASE_URL=\"https://sweetdate.io\" METHOD=\"POST\" PATH=\"/api/v1/dispatch\" TS=$(date +%s) CANONICAL=$(printf \"v1\\n%s\\n%s\\n%s\\n-\\n\" \"$METHOD\" \"$PATH\" \"$TS\") SIG_BIN=$(printf \"%s\" \"$CANONICAL\" | openssl pkeyutl -sign -inkey sk.pem -rawin) SIG_B64=$(printf \"%s\" \"$SIG_BIN\" | base64 | tr '+/' '-_' | tr -d '=') curl -i \"$BASE_URL$PATH\" \\ -H \"Content-Type: application/json\" \\ -H \"sd-app-id: app_7dc655cb-30ee-422f-b13a-f0a796c53879\" \\ -H \"sd-timestamp: $TS\" \\ -H \"sd-signature: $SIG_B64\" \\ --data @- &lt;&lt;'JSON' { \"payload\": { \"cmd\": \"TENANTS.LIST\", \"limit\": 25, \"offset\": 0 } } JSON . ",
-    "url": "/sd_docs/10-authorization/#how-to-sign-openssl-pure-shell",
+    "url": "/sd_protocol/10-authorization/#how-to-sign-openssl-pure-shell",
     
     "relUrl": "/10-authorization/#how-to-sign-openssl-pure-shell"
   },"32": {
     "doc": "Authorization (HTTP)",
     "title": "Clock Skew",
     "content": ". | Default allowed skew is ±300 seconds. | If your system clock is off, signatures will be rejected with 401 unauthorized. | . ",
-    "url": "/sd_docs/10-authorization/#clock-skew",
+    "url": "/sd_protocol/10-authorization/#clock-skew",
     
     "relUrl": "/10-authorization/#clock-skew"
   },"33": {
     "doc": "Authorization (HTTP)",
     "title": "Error Responses",
     "content": ". | 401 unauthorized — missing headers, bad/expired timestamp, key not found, or signature verify failed. | 404 not_found — unknown route. | Body is JSON; {\"error\":\"unauthorized\"} in the 401 case. | . ",
-    "url": "/sd_docs/10-authorization/#error-responses",
+    "url": "/sd_protocol/10-authorization/#error-responses",
     
     "relUrl": "/10-authorization/#error-responses"
   },"34": {
     "doc": "Authorization (HTTP)",
     "title": "Security Notes",
     "content": ". | Never share your private key. Store it securely (file permissions, secrets manager). | Rotate credentials regularly. | Prefer short‑lived tokens or key rotation for automation. | Log sd-app-id, not signature values. | . ",
-    "url": "/sd_docs/10-authorization/#security-notes",
+    "url": "/sd_protocol/10-authorization/#security-notes",
     
     "relUrl": "/10-authorization/#security-notes"
   },"35": {
     "doc": "Authorization (HTTP)",
     "title": "Troubleshooting",
     "content": ". | 401 with correct headers — check: . | sd-timestamp is seconds (not ms) and within ±300s. | Canonical string uses the exact path + query your request sends. | METHOD uppercased. | sd-signature is base64url without padding (= removed). | Your public key registered for the given sd-app-id matches the private key used. | . | Query parameters — must be present in the canonical path (e.g. /whoami?x=1&amp;y=2). | . Appendix: Example Canonical Strings . # GET /api/v1/whoami at 1724064000 v1 GET /api/v1/whoami 1724064000 - # POST /api/v1/dispatch at 1724064001 v1 POST /api/v1/dispatch 1724064001 - . ",
-    "url": "/sd_docs/10-authorization/#troubleshooting",
+    "url": "/sd_protocol/10-authorization/#troubleshooting",
     
     "relUrl": "/10-authorization/#troubleshooting"
   },"36": {
     "doc": "Authorization (HTTP)",
     "title": "Authorization (HTTP)",
     "content": " ",
-    "url": "/sd_docs/10-authorization/",
+    "url": "/sd_protocol/10-authorization/",
     
     "relUrl": "/10-authorization/"
   },"37": {
     "doc": "Conformance Testing",
     "title": "Conformance Testing",
     "content": "The SweetDate Conformance Testing suite is a set of tools and protocols that verify whether a client implementation of the SweetDate Protocol behaves as expected. This mechanism is designed to ensure trust, interoperability, and predictability across implementations in different programming languages. ",
-    "url": "/sd_docs/120-conformance-testing/",
+    "url": "/sd_protocol/120-conformance-testing/",
     
     "relUrl": "/120-conformance-testing/"
   },"38": {
     "doc": "Conformance Testing",
     "title": "Purpose",
     "content": "While the SweetDate CLI scaffolds starter templates from the official protocol definition, the Conformance Testing Suite ensures that the resulting implementation correctly and fully implements the protocol. It does so by coordinating an automated interaction between: . | a Language-specific Test Runner (maintained by the implementor), and | a Universal Conformance Driver (provided by the SweetDate project). | . Together, these components validate whether the commands, error handling, and edge case behavior conform to the expectations defined in the protocol specification. ",
-    "url": "/sd_docs/120-conformance-testing/#purpose",
+    "url": "/sd_protocol/120-conformance-testing/#purpose",
     
     "relUrl": "/120-conformance-testing/#purpose"
   },"39": {
     "doc": "Conformance Testing",
     "title": "Why It Matters",
     "content": "Client implementations are developed independently across ecosystems. Conformance testing gives implementors and integrators confidence that: . | The library behaves exactly like others (regardless of language) | Protocol-breaking bugs are caught early | New protocol versions can be tested before releasing | . It also enables third-party distribution: packages can be labeled as SweetDate Certified once they pass the conformance suite. ",
-    "url": "/sd_docs/120-conformance-testing/#why-it-matters",
+    "url": "/sd_protocol/120-conformance-testing/#why-it-matters",
     
     "relUrl": "/120-conformance-testing/#why-it-matters"
   },"40": {
     "doc": "Conformance Testing",
     "title": "Testing Strategy",
     "content": "The Conformance Suite uses an active test pattern inspired by contract-based testing: . | The Conformance Driver sends a command to the client implementation asking it to run a specific scenario (e.g., EVENTS.CREATE with missing start_time). | The client runs that test internally and returns a success/failure signal. | The driver verifies the result and logs/report outcomes in a common format. | . This avoids the risk of false compliance caused by incomplete test coverage inside language-specific test suites. ",
-    "url": "/sd_docs/120-conformance-testing/#testing-strategy",
+    "url": "/sd_protocol/120-conformance-testing/#testing-strategy",
     
     "relUrl": "/120-conformance-testing/#testing-strategy"
   },"41": {
     "doc": "Conformance Testing",
     "title": "Components",
     "content": "| Component | Description | . | Conformance Driver | A generic orchestrator that issues standardized test commands and receives test results from the client. | . | Language-specific Test Runner | A program or script (written in Ruby, PHP, Elixir, etc.) that accepts test requests and executes matching scenarios using the actual client implementation. | . | Protocol Spec | The source of truth. All test cases are derived from the SDIP JSON files, ensuring alignment across all tooling. | . | Result Format | JSON and writes to the console | . ",
-    "url": "/sd_docs/120-conformance-testing/#components",
+    "url": "/sd_protocol/120-conformance-testing/#components",
     
     "relUrl": "/120-conformance-testing/#components"
   },"42": {
     "doc": "Conformance Testing",
     "title": "Example Flow",
     "content": "```mermaid sequenceDiagram participant Driver as Conformance Driver participant Impl as Ruby Client (Test Runner) . Driver-»Impl: { “command”: “EVENTS.CREATE”, “scenario”: “missing start_time” } Impl–»Driver: { “status”: “fail”, “error_code”: “MISSING_FIELD” } Driver-»Impl: { “command”: “EVENTS.DELETE”, “scenario”: “valid event” } Impl–»Driver: { “status”: “pass” } . ",
-    "url": "/sd_docs/120-conformance-testing/#example-flow",
+    "url": "/sd_protocol/120-conformance-testing/#example-flow",
     
     "relUrl": "/120-conformance-testing/#example-flow"
   },"43": {
     "doc": "Calendars",
     "title": "CALENDARS — Command Reference",
     "content": "This page specifies commands for working with calendars, their events, and calendar–user associations. Each section documents parameters, response types, and examples. LIST_CALENDARS . Returns calendars ordered by name ascending. Request . GET /api/v1/calendars?limit=25&amp;offset=0 . Response . { \"status\": \"ok\", \"result\": { \"calendars\": [ { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Work\", \"color_theme\": \"red\", \"visibility\": \"shared\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } ], \"limit\": 25, \"offset\": 0 } } . Error . { \"status\": \"error\", \"message\": \"...\" } . CREATE . Create a new calendar. Permitted values for visibility: . | private – Only the owner has access | shared – Shared with selected users | public – Discoverable within the tenant | unlisted – Hidden from discovery, link/ID required | . Request . POST /api/v1/calendars { \"name\": \"Work\", \"color_theme\": \"red\", \"visibility\": \"shared\" } . Response . { \"status\": \"ok\", \"calendar\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Work\", \"color_theme\": \"red\", \"visibility\": \"shared\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . GET . Get a single calendar by ID. Request . GET /api/v1/calendars/:id . Response . { \"status\": \"ok\", \"calendar\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Work\", \"color_theme\": \"red\", \"visibility\": \"shared\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . UPDATE . Update an existing calendar. Permitted values for visibility: . | private – Only the owner has access | shared – Shared with selected users | public – Discoverable within the tenant | unlisted – Hidden from discovery, link/ID required | . Request . PUT /api/v1/calendars/:id { \"name\": \"Work (Team)\", \"visibility\": \"public\" } . Response . { \"status\": \"ok\", \"calendar\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Work (Team)\", \"color_theme\": \"red\", \"visibility\": \"public\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . DELETE . Delete a calendar. Request . DELETE /api/v1/calendars/:id . Response . {\"status\": \"ok\"} . Error . { \"status\": \"error\", \"message\": \"...\" } . LIST_EVENTS . List all events on a calendar. Request . GET /api/v1/calendars/:calendar_id/events?limit=25&amp;offset=0 . Response . { \"status\": \"ok\", \"events\": [ { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Weekly Sync\", \"description\": \"Team status meeting\", \"status\": \"scheduled\", \"visibility\": \"public\", \"color_theme\": \"default\", \"location\": \"Room 3A\", \"start_time\": \"2025-08-20T09:00:00Z\", \"end_time\": \"2025-08-20T09:30:00Z\", \"recurrence_rule\": \"weekly\", \"all_day\": false, \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } ], \"limit\": 25, \"offset\": 0 } . Error . { \"status\": \"error\", \"message\": \"...\" } . CREATE_EVENT . Create an event on a calendar. Permitted values for status: . | scheduled · cancelled · postponed · completed | . Permitted values for visibility: . | private · public · busy | . Permitted values for recurrence_rule: . | none · daily · weekly · monthly · yearly | . Request . POST /api/v1/calendars/:calendar_id/events { \"name\": \"Planning\", \"description\": \"Q3 planning session\", \"status\": \"scheduled\", \"visibility\": \"busy\", \"color_theme\": \"default\", \"location\": \"Zoom\", \"start_time\": \"2025-08-22T13:00:00Z\", \"end_time\": \"2025-08-22T14:00:00Z\", \"recurrence_rule\": \"none\", \"all_day\": false } . Response . { \"status\": \"ok\", \"event\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Planning\", \"description\": \"Q3 planning session\", \"status\": \"scheduled\", \"visibility\": \"busy\", \"color_theme\": \"default\", \"location\": \"Zoom\", \"start_time\": \"2025-08-22T13:00:00Z\", \"end_time\": \"2025-08-22T14:00:00Z\", \"recurrence_rule\": \"none\", \"all_day\": false, \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . GET_EVENT . Get a calendar event by ID. Request . GET /api/v1/calendars/:calendar_id/events/:id . Response . { \"status\": \"ok\", \"event\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Planning\", \"description\": \"Q3 planning session\", \"status\": \"scheduled\", \"visibility\": \"busy\", \"color_theme\": \"default\", \"location\": \"Zoom\", \"start_time\": \"2025-08-22T13:00:00Z\", \"end_time\": \"2025-08-22T14:00:00Z\", \"recurrence_rule\": \"none\", \"all_day\": false, \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . UPDATE_EVENT . Update a calendar event. Permitted values for status: scheduled · cancelled · postponed · completed Permitted values for visibility: private · public · busy Permitted values for recurrence_rule: none · daily · weekly · monthly · yearly . Request . PUT /api/v1/calendars/:calendar_id/events/:id { \"status\": \"cancelled\", \"visibility\": \"public\", \"name\": \"Planning (Cancelled)\" } . Response . { \"status\": \"ok\", \"event\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Planning (Cancelled)\", \"description\": \"Q3 planning session\", \"status\": \"cancelled\", \"visibility\": \"public\", \"color_theme\": \"default\", \"location\": \"Zoom\", \"start_time\": \"2025-08-22T13:00:00Z\", \"end_time\": \"2025-08-22T14:00:00Z\", \"recurrence_rule\": \"none\", \"all_day\": false, \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . DELETE_EVENT . Delete a calendar event. Request . DELETE /api/v1/calendars/:calendar_id/events/:id . Response . { \"status\": \"ok\" } . Error . { \"status\": \"error\", \"message\": \"...\" } . LIST_USERS . List all users attached to a calendar. Request . GET /api/v1/calendars/:calendar_id/users . Response . { \"status\": \"ok\", \"calendar_id\": \"00000000-0000-0000-0000-000000000000\", \"users\": [ { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Alice Example\", \"email\": \"alice@example.com\", \"role\": \"owner\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } ] } . Error . { \"status\": \"error\", \"message\": \"...\" } . CREATE_USER . Attach a user to a calendar. Permitted values for role: . | owner – Owns the calendar and can delete it | admin – Edit | guest – Show | . Request . POST /api/v1/calendars/:calendar_id/users { \"user_id\": \"00000000-0000-0000-0000-000000000000\", \"role\": \"admin\" } . Response . { \"status\": \"ok\", \"user\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Alice Example\", \"email\": \"alice@example.com\", \"role\": \"admin\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . GET_USER . Get a calendar user by ID. Request . GET /api/v1/calendars/:calendar_id/users/:id . Response . { \"status\": \"ok\", \"user\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Alice Example\", \"email\": \"alice@example.com\", \"role\": \"admin\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . UPDATE_USER . Update a calendar user. Request . PUT /api/v1/calendars/:calendar_id/users/:id { \"role\": \"owner\" } . Response . { \"status\": \"ok\", \"user\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Alice Example\", \"email\": \"alice@example.com\", \"role\": \"owner\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . DELETE_USER . Delete a calendar user association. Request . DELETE /api/v1/calendars/:calendar_id/users/:id . Response . { \"status\": \"ok\" } . Error . { \"status\": \"error\", \"message\": \"...\" } . ",
-    "url": "/sd_docs/40-calendars/#calendars--command-reference",
+    "url": "/sd_protocol/40-calendars/#calendars--command-reference",
     
     "relUrl": "/40-calendars/#calendars--command-reference"
   },"44": {
     "doc": "Calendars",
     "title": "Calendars",
     "content": " ",
-    "url": "/sd_docs/40-calendars/",
+    "url": "/sd_protocol/40-calendars/",
     
     "relUrl": "/40-calendars/"
   },"45": {
     "doc": "SweetDate CLI",
     "title": "SweetDate CLI",
     "content": "The SweetDate CLI is a developer tool for working with the SweetDate Implementation Protocol (SDIP). It takes the protocol definition (provided as JSON) and: . | Generates starter templates for implementing client libraries in different programming languages. | Runs automated conformance tests to verify correct protocol behavior. | . ",
-    "url": "/sd_docs/100-sweet-date-cli/",
+    "url": "/sd_protocol/100-sweet-date-cli/",
     
     "relUrl": "/100-sweet-date-cli/"
   },"46": {
     "doc": "SweetDate CLI",
     "title": "Purpose",
     "content": "The SweetDate CLI ensures secure, consistent, and verifiable implementations of client libraries. | It scaffolds a complete set of protocol commands for each supported language. | It provides a Universal Conformance Driver to test that implementations behave exactly as expected. | . This guarantees that client libraries across Ruby, Elixir, PHP, and future languages stay aligned with the SweetDate protocol — both in structure and in runtime behavior. ",
-    "url": "/sd_docs/100-sweet-date-cli/#purpose",
+    "url": "/sd_protocol/100-sweet-date-cli/#purpose",
     
     "relUrl": "/100-sweet-date-cli/#purpose"
   },"47": {
     "doc": "SweetDate CLI",
     "title": "Flow",
     "content": ". | Input: A JSON specification of the SDIP (SweetDate Implementation Protocol). | Output: Language-specific scaffolding code (Ruby, Elixir, PHP, …). | Verification: Optional conformance testing against a live SweetDate instance. | . ",
-    "url": "/sd_docs/100-sweet-date-cli/#flow",
+    "url": "/sd_protocol/100-sweet-date-cli/#flow",
     
     "relUrl": "/100-sweet-date-cli/#flow"
   },"48": {
     "doc": "SweetDate CLI",
     "title": "Configuration",
     "content": "The CLI reads a configuration file (sd.config.json) in the project root. This file defines the protocol location, output folders, and optional test configuration. Example: . { \"protocol\": \"protocol-version-01/protocol.json\", \"targets\": { \"ruby\": { \"output\": \"out/ruby\" }, \"elixir\": { \"output\": \"out/elixir\" } }, \"test\": { \"base_url\": \"http://localhost:4000\", \"implementations\": { \"ruby\": \"bin/test-ruby-client\", \"elixir\": \"bin/test-elixir-client\" } } } . ",
-    "url": "/sd_docs/100-sweet-date-cli/#configuration",
+    "url": "/sd_protocol/100-sweet-date-cli/#configuration",
     
     "relUrl": "/100-sweet-date-cli/#configuration"
   },"49": {
     "doc": "SweetDate CLI",
     "title": "Conformance Testing",
     "content": "The CLI includes a Universal Conformance Driver that invokes client implementations and verifies they respond correctly to each command defined in the protocol. Command . sd test &lt;language&gt; [--only=COMMAND] [--trace] . Example . sd test ruby sd test elixir --only=TENANTS.GET_LIST . Expected Behavior . The language-specific implementation must expose a way to: . | Receive a request (typically via CLI, TCP, or JSON-RPC) | Execute the specified protocol command | Return the result or error in the expected format | . The CLI will: . | Send a request for each command | Validate the structure, data types, and semantic output | Mark the test as passed or failed | . ",
-    "url": "/sd_docs/100-sweet-date-cli/#conformance-testing",
+    "url": "/sd_protocol/100-sweet-date-cli/#conformance-testing",
     
     "relUrl": "/100-sweet-date-cli/#conformance-testing"
   },"50": {
     "doc": "SweetDate CLI",
     "title": "Protocol Definition Files",
     "content": "The SweetDate CLI generates code based on the SweetDate Implementation Protocol (SDIP). These definitions are stored as JSON files in the project root, organized by protocol version. protocol-version-01/ ├─ calendars.json ├─ tenants.json ├─ users.json └─ events.json . Example structure: . { \"TENANTS\": { \"commands\": [ { \"name\": \"GET_LIST\", \"description\": \"Returns tenants ordered by name ascending.\", \"params\": { \"limit\": { \"type\": \"integer\", \"required\": false, \"default\": 25, \"min\": 1, \"max\": 100, \"description\": \"Maximum number of items to return.\" }, \"offset\": { \"type\": \"integer\", \"required\": false, \"default\": 0, \"min\": 0, \"description\": \"Number of items to skip.\" } }, \"response\": { \"type\": \"tenant_list\", \"description\": \"Paginated list of tenants (ordered by name asc).\", \"example\": { \"status\": \"ok\", \"result\": { \"tenants\": [ { \"id\": \"t1\", \"name\": \"Alpha\", \"account_id\": \"acc-123\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" }, { \"id\": \"t2\", \"name\": \"Beta\", \"account_id\": \"acc-456\", \"inserted_at\": \"2025-08-18T11:00:00Z\", \"updated_at\": \"2025-08-18T11:00:00Z\" } ], \"limit\": 25, \"offset\": 0 } }, \"error_example\": { \"error\": \"invalid\", \"details\": { \"limit\": [\"must be between 1 and 100\"], \"offset\": [\"must be &gt;= 0\"] } } } } ] } } . Let me know if you’d like a diagram or dedicated page for the Conformance Test Protocol as well. ",
-    "url": "/sd_docs/100-sweet-date-cli/#protocol-definition-files",
+    "url": "/sd_protocol/100-sweet-date-cli/#protocol-definition-files",
     
     "relUrl": "/100-sweet-date-cli/#protocol-definition-files"
   },"51": {
     "doc": "Command Format Reference",
     "title": "Command Definition Format",
     "content": "This document describes how the JSON specification for commands maps to generated documentation and client libraries. It serves as a guide for developers who want to add or extend commands in the protocol. ",
-    "url": "/sd_docs/15-format/#command-definition-format",
+    "url": "/sd_protocol/15-format/#command-definition-format",
     
     "relUrl": "/15-format/#command-definition-format"
   },"52": {
     "doc": "Command Format Reference",
     "title": "Structure",
     "content": "Each context (e.g. TENANTS, CALENDARS) contains a commands array. Each command is defined as an object with the following fields: . { MODEL_NAMES: { \"name\": \"SOME_COMAND\", \"url: \"api/v1/SOME_ENDPOINT\" \"description\": \"Some description\", \"params\": { \"SOME_PARAM\": { \"type\": \"integer\", \"required\": false, \"default\": 25, \"min\": 1, \"max\": 100, \"description\": \"Some description.\" }, \"SOME_OTHER_PARAM\": { \"type\": \"integer\", \"required\": false, \"default\": 0, \"min\": 0, \"description\": \"Some description.\" } }, \"response\": { \"type\": \"SOME_COMAND\", \"description\": \"Some description).\", \"example\": { \"...\": \"...\" }, \"error_example\": { \"...\": \"...\" } } }, { \"name\": \"SOME_OTHER_COMAND\", ... } } . ",
-    "url": "/sd_docs/15-format/#structure",
+    "url": "/sd_protocol/15-format/#structure",
     
     "relUrl": "/15-format/#structure"
   },"53": {
     "doc": "Command Format Reference",
     "title": "Field Mapping",
     "content": "MODEL_NAMES . | Purpose: Unique identifier of context the commands is working on (e.g. TENANTS, USERS). | Documentation: Becomes the section title in the reference. | Client Libraries: Used as the function/method name. | . name . | Purpose: Unique identifier of the command (e.g. GET_LIST, CREATE). | Documentation: Becomes the section title in the reference. | Client Libraries: Used as the function/method name. | . description . | Purpose: Explains what the command does in one sentence. | Documentation: Appears below the command title. | Client Libraries: Added as a docstring/comment. | . params . | Purpose: Defines input fields for the command. | Attributes: . | type: data type (string, integer, boolean, etc.) | required: whether the field is mandatory | default: default value if omitted | min/max: numeric constraints | description: human-readable explanation | . | Documentation: Rendered as part of the request example or parameter list. | Client Libraries: Used for validation and function signatures. | . response . | Purpose: Defines the structure of the command’s response. | Attributes: . | type: symbolic type (e.g. tenant, tenant_list) | description: what the response represents | example: JSON payload of a successful result | error_example: JSON payload of an error case | . | Documentation: Rendered under Response and Error examples. | Client Libraries: Defines the expected return structure and error handling. | . ",
-    "url": "/sd_docs/15-format/#field-mapping",
+    "url": "/sd_protocol/15-format/#field-mapping",
     
     "relUrl": "/15-format/#field-mapping"
   },"54": {
     "doc": "Command Format Reference",
     "title": "Example Mapping",
     "content": "JSON Definition . { TENANTS: { \"name\": \"GET_LIST\", \"description\": \"Returns tenants ordered by name ascending.\", \"params\": { \"limit\": { \"type\": \"integer\", \"required\": false, \"default\": 25 }, \"offset\": { \"type\": \"integer\", \"required\": false, \"default\": 0 } }, \"response\": { \"type\": \"tenant_list\", \"description\": \"Paginated list of tenants (ordered by name asc).\", \"example\": { \"status\": \"ok\", \"result\": { \"items\": [] } }, \"error_example\": { \"error\": \"invalid\", \"details\": {} } } } } . Generated Documentation . ### GET_LIST Returns tenants ordered by name ascending. **Request** GET /api/v1/tenants?limit=25&amp;offset=0 **Response** { \"status\": \"ok\", \"result\": { \"items\": [] } } **Error** { \"error\": \"invalid\", \"details\": {} } . Client Library (Pseudo-code) . def list_tenants(limit \\ 25, offset \\ 0) do \"REST endpoing\" \"api/v1/tennants/{params}\" \"REST endpoint: TENANTS.GET_LIST\" # lets rethink send_command, i beleive api interface should be read from an environment variable in the client #send_command(\"TENANTS.GET_LIST\", %{limit: limit, offset: offset}) end . ",
-    "url": "/sd_docs/15-format/#example-mapping",
+    "url": "/sd_protocol/15-format/#example-mapping",
     
     "relUrl": "/15-format/#example-mapping"
   },"55": {
     "doc": "Command Format Reference",
     "title": "Extending the Protocol",
     "content": ". | Add a new command block under the appropriate context (e.g. TENANTS). | Define name, description, params, and response. | Regenerate documentation and client libraries from the JSON file. | . This ensures consistent behavior across all supported languages. ",
-    "url": "/sd_docs/15-format/#extending-the-protocol",
+    "url": "/sd_protocol/15-format/#extending-the-protocol",
     
     "relUrl": "/15-format/#extending-the-protocol"
   },"56": {
     "doc": "Command Format Reference",
     "title": "Command Format Reference",
     "content": " ",
-    "url": "/sd_docs/15-format/",
+    "url": "/sd_protocol/15-format/",
     
     "relUrl": "/15-format/"
   },"57": {
     "doc": "Tenants",
     "title": "TENANTS — Command Reference",
     "content": "This page specifies commands for working with tenants, tenant–user associations, and tenant–calendar associations. Each section documents parameters, response types, and examples. LIST_TENANTS . Returns tenants ordered by name ascending. Request . GET /api/v1/tenants?limit=25&amp;offset=0 . Response . { \"status\": \"ok\", \"result\": { \"tenants\": [ { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Alpha\", \"account_id\": \"acc-123\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } ], \"limit\": 25, \"offset\": 0 } } . Error . { \"status\": \"error\", \"message\": \"...\" } . CREATE . Create a new tenant. Request . POST /api/v1/tenants { \"name\": \"Building 4\" } . Response . { \"status\": \"ok\", \"tenant\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Building 4\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . GET . Get a single tenant by ID. Request . GET /api/v1/tenants/:id . Response . { \"status\": \"ok\", \"tenant\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Terminal 23\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . UPDATE . Update an existing tenant. Request . PUT /api/v1/tenants/:id { \"name\": \"Terminal 3 3/4\" } . Response . { \"status\": \"ok\", \"tenant\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Terminal 3 3/4\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . DELETE . Delete a tenant. Request . DELETE /api/v1/tenants/:id . Response . {\"status\": \"ok\"} . Error . { \"status\": \"error\", \"message\": \"...\" } . LIST_USERS . List all tenant users. Optional query params: . | limit – Maximum number of users to return (default: 25) | offset – Number of users to skip before starting to return results (default: 0) | q – Search term (matches against user name or email) | . Request . GET /api/v1/tenants/:tenant_id/users?limit=10&amp;offset=20&amp;q=alice . Response . { \"status\": \"ok\", \"users\": [ { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"some name\", \"email\": \"some-email@example.com\" \"role\": \"owner\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" }, { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Some other name\", \"email\": \"some-other-email@example.com\", \"role\": \"admin\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } ] } . Error . { \"status\": \"error\", \"message\": \"not found\", \"error_code\": \"NOT_FOUND\" } . CREATE_USER . Create a tenant–user association. Permitted values for role: . | owner – Owns the calendar and can delete it | admin – Edit | guest – Show | . Request . POST /api/v1/tenants/:tenant_id/users { \"user_id\": \"00000000-0000-0000-0000-000000000000\", \"role\": \"admin\" } . Response . { \"status\": \"ok\", \"user\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"email\": \"some-name@example.com, \"name\": \"some name\", \"role\": \"admin\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error 404 Not Found . { \"status\": \"error\", \"message\": \"not found\", \"error_code\": \"NOT_FOUND\" } . Error 422 Unprocessable Entity . { \"status\": \"error\", \"message\": \"invalid input\", \"error_code\": \"VALIDATION_ERROR\", \"fields\": { \"user_id\": [\"is not a valid UUID\"], \"role\": [\"is invalid\"] # when enum cast fails } } . GET_USER . Get a tenant user by ID. Request . GET /api/v1/tenants/:tenant_id/users/:id . Response . { \"status\": \"ok\", \"user\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Some name\", \"email\": \"some-name@example.com\", \"role\": \"owner\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . %{ \"status\" =&gt; \"error\", \"error_code\" =&gt; \"VALIDATION_ERROR\", \"fields\" =&gt; %{\"role\" =&gt; [\"is invalid\"]}, \"message\" =&gt; \"invalid input\"**** } . UPDATE_USER . Update a tenant user. Request . PUT /api/v1/tenants/:tenant_id/users/:id { \"role\": \"admin\" } . Response . { \"status\": \"ok\", \"user\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Some name\", \"email\": \"some-name@example.com\", \"role\": \"admin\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Errors 422 Unprocessable Entity . { \"status\": \"error\", \"message\": \"invalid input\", \"error_code\": \"VALIDATION_ERROR\", \"fields\": { \"role\": [\"is invalid\"] } } . Errors 404 Not Found . { \"status\": \"error\", \"message\": \"not found\", \"error_code\": \"NOT_FOUND\" } . DELETE_USER . Delete a tenant user. Request . DELETE /api/v1/tenants/:tenant_id/users/:id . Response . {\"status\": \"ok\"} . Errors 404 Not Found . { \"status\": \"error\", \"message\": \"not found\", \"error_code\": \"NOT_FOUND\" } . LIST_CALENDARS . List all calendars attached to a tenant. Request . GET /api/v1/tenants/:tenant_id/calendars . Response . { \"status\": \"ok\", \"calendars\": [ { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Some name\", \"color_theme\": \"red\", \"visibility\": \"shared\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" }, { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Some other name\", \"color_theme\": \"blue\" \"visibility\": \"shared\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } ] } . Errors 404 Not Found . { \"status\": \"error\", \"message\": \"not found\", \"error_code\": \"NOT_FOUND\" } . CREATE_CALENDAR . Attach a calendar to a tenant. Permitted values for visibility: . | private – Only the owner has access | shared – Shared with selected users | public – Discoverable within the tenant | unlisted – Hidden from discovery, link/ID required | . Request . POST /api/v1/tenants/:tenant_id/calendars { \"calendar_id\": \"00000000-0000-0000-0000-000000000000\", } . Response . { \"status\": \"ok\", \"calendar\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Some name\", \"color_theme\": \"red\", \"visibility\": \"shared\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . GET_CALENDAR . Get a tenant calendar by ID, including its associated users . Request . GET /api/v1/tenants/:tenant_id/calendars/:id . Response . { \"status\": \"ok\", \"calendar\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Some calendar\", \"color_theme\": \"white\", \"visibility\": \"private\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\", \"users\": [ { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Some name\", \"email\": \"some-name@example.com\", \"role\": \"owner\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" }, { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Some other name\", \"email\": \"some-other-name@example.com\", \"role\": \"admin\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } ] } } . Error . { \"status\": \"error\", \"message\": \"...\" } . DELETE_CALENDAR . Delete a tenant calendar association. Request . DELETE /api/v1/tenants/:tenant_id/calendars/:id . Response . { \"status\": \"ok\" } . Error . { \"status\": \"error\", \"message\": \"...\" } . ",
-    "url": "/sd_docs/20-tenants/#tenants--command-reference",
+    "url": "/sd_protocol/20-tenants/#tenants--command-reference",
     
     "relUrl": "/20-tenants/#tenants--command-reference"
   },"58": {
     "doc": "Tenants",
     "title": "Tenants",
     "content": " ",
-    "url": "/sd_docs/20-tenants/",
+    "url": "/sd_protocol/20-tenants/",
     
     "relUrl": "/20-tenants/"
   },"59": {
     "doc": "Users",
     "title": "USERS — Command Reference",
     "content": "This page specifies commands for working with users and their associated calendars. Each section documents parameters, response types, and examples. LIST_USERS . Returns users ordered by name ascending. Request . GET /api/v1/users?limit=25&amp;offset=0 . Response . { \"status\": \"ok\", \"result\": { \"users\": [ { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Alice Example\", \"email\": \"alice@example.com\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } ], \"limit\": 25, \"offset\": 0 } } . Error . { \"status\": \"error\", \"message\": \"...\" } . CREATE . Create a new user. Request . POST /api/v1/users { \"name\": \"Charlie Example\", \"email\": \"charlie@example.com\" } . Response . { \"status\": \"ok\", \"user\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Charlie Example\", \"email\": \"charlie@example.com\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . GET . Get a single user by ID. Request . GET /api/v1/users/:id . Response . { \"status\": \"ok\", \"user\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Bob Example\", \"email\": \"bob@example.com\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . UPDATE . Update an existing user. Request . PUT /api/v1/users/:id { \"name\": \"Bobby Example\" } . Response . { \"status\": \"ok\", \"user\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Bobby Example\", \"email\": \"bob@example.com\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . DELETE . Delete a user. Request . DELETE /api/v1/users/:id . Response . { \"status\": \"ok\" } . Error . { \"status\": \"error\", \"message\": \"...\" } . LIST_CALENDARS . List all calendars attached to a user. Request . GET /api/v1/users/:user_id/calendars . Response . { \"status\": \"ok\", \"calendars\": [ { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Work\", \"color_theme\": \"red\", \"visibility\": \"shared\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" }, { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Personal\", \"color_theme\": \"blue\", \"visibility\": \"private\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } ] } . Error . { \"status\": \"error\", \"message\": \"...\" } . CREATE_CALENDAR . Attach a calendar to a user. Permitted values for visibility:\\ . | private – Only the owner has access\\ | shared – Shared with selected users\\ | public – Discoverable within the tenant\\ | unlisted – Hidden from discovery, link/ID required | . Request . POST /api/v1/users/:user_id/calendars { \"calendar_id\": \"00000000-0000-0000-0000-000000000000\" } . Response . { \"status\": \"ok\", \"calendar\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Work\", \"color_theme\": \"red\", \"visibility\": \"shared\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } } . Error . { \"status\": \"error\", \"message\": \"...\" } . GET_CALENDAR . Get a user calendar by ID, including its associated users. Request . GET /api/v1/users/:user_id/calendars/:id . Response . { \"status\": \"ok\", \"calendar\": { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Work\", \"color_theme\": \"white\", \"visibility\": \"private\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\", \"users\": [ { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Alice Example\", \"email\": \"alice@example.com\", \"role\": \"owner\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" }, { \"id\": \"00000000-0000-0000-0000-000000000000\", \"name\": \"Bob Example\", \"email\": \"bob@example.com\", \"role\": \"admin\", \"inserted_at\": \"2025-08-18T09:20:00Z\", \"updated_at\": \"2025-08-19T10:15:00Z\" } ] } } . Error . { \"status\": \"error\", \"message\": \"...\" } . DELETE_CALENDAR . Delete a user calendar association. Request . DELETE /api/v1/users/:user_id/calendars/:id . Response . { \"status\": \"ok\" } . Error . { \"status\": \"error\", \"message\": \"...\" } . ",
-    "url": "/sd_docs/30-users/#users--command-reference",
+    "url": "/sd_protocol/30-users/#users--command-reference",
     
     "relUrl": "/30-users/#users--command-reference"
   },"60": {
     "doc": "Users",
     "title": "Users",
     "content": " ",
-    "url": "/sd_docs/30-users/",
+    "url": "/sd_protocol/30-users/",
     
     "relUrl": "/30-users/"
   }

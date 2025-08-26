@@ -1,13 +1,13 @@
 title: SweetDate
-description: Headless Calendar with native implementations for developer satisfaction
+description: SDIP (SweetDate Implementation Protocol)
 
 remote_theme: just-the-docs/just-the-docs
 
 plugins:
   - jekyll-remote-theme
 
-url: https://sweetdate-calendar.github.io
-baseurl: /sd_docs
+url: https://github.com/SweetDate-Calendar/sd_protocol
+baseurl: /sd_protocol
 
 aux_links:
   Github Repository: https://github.com/SweetDate-Calendar/
