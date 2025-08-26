@@ -159,17 +159,20 @@ DELETE /api/v1/tenants/:id
 
 ### LIST_USERS
 List all tenant users.
+> Optional query params:
+> -	**limit** – Maximum number of users to return (default: 25)
+> -	**offset** – Number of users to skip before starting to return results (default: 0)
+> -	**q** – Search term (matches against user name or email)
 
 **Request**
 ```
-GET /api/v1/tenants/:tenant_id/users
+GET /api/v1/tenants/:tenant_id/users?limit=10&offset=20&q=alice
 ```
 
 **Response**
 ```
 {
   "status": "ok",
-  "tenant_id": "00000000-0000-0000-0000-000000000000",
   "users": [
     {
       "id": "00000000-0000-0000-0000-000000000000", 
@@ -193,7 +196,11 @@ GET /api/v1/tenants/:tenant_id/users
 
 **Error**
 ```
- { "status": "error", "message": "..." }
+{
+  "status": "error",
+  "message": "not found",
+  "error_code": "NOT_FOUND"
+}
 ```
 
 ---
@@ -231,9 +238,26 @@ POST /api/v1/tenants/:tenant_id/users
 }
 ```
 
-**Error**
+**Error** 404 Not Found
 ```
- { "status": "error", "message": "..." }
+ 
+  {
+    "status": "error",
+    "message": "not found",
+    "error_code": "NOT_FOUND"
+  }
+```
+**Error**   422 Unprocessable Entity
+```
+{
+  "status": "error",
+  "message": "invalid input",
+  "error_code": "VALIDATION_ERROR",
+  "fields": {
+    "user_id": ["is not a valid UUID"],
+    "role": ["is invalid"]  # when enum cast fails
+  }
+}
 ```
 
 ---
@@ -263,7 +287,12 @@ GET /api/v1/tenants/:tenant_id/users/:id
 
 **Error**
 ```
- { "status": "error", "message": "..." }
+%{
+  "status" => "error",
+  "error_code" => "VALIDATION_ERROR",
+  "fields" => %{"role" => ["is invalid"]},
+  "message" => "invalid input"****
+}
 ```
 
 ---
@@ -294,9 +323,25 @@ PUT /api/v1/tenants/:tenant_id/users/:id
 }
 ```
 
-**Error**
+**Errors** 422 Unprocessable Entity
+
 ```
- { "status": "error", "message": "..." }
+{
+  "status": "error",
+  "message": "invalid input",
+  "error_code": "VALIDATION_ERROR",
+  "fields": {
+    "role": ["is invalid"]
+  }
+}
+```
+**Errors** 404 Not Found
+```
+{
+  "status": "error",
+  "message": "not found",
+  "error_code": "NOT_FOUND"
+}
 ```
 
 ---
@@ -309,14 +354,18 @@ Delete a tenant user.
 DELETE /api/v1/tenants/:tenant_id/users/:id
 ```
 
-**Response**
+**Response** 
 ```
 {"status": "ok"}
 ```
 
-**Error**
+**Errors** 404 Not Found
 ```
-{ "status": "error", "message": "..." }
+{
+  "status": "error",
+  "message": "not found",
+  "error_code": "NOT_FOUND"
+}
 ```
 
 ---
@@ -356,9 +405,13 @@ GET /api/v1/tenants/:tenant_id/calendars
 }
 ```
 
-**Error**
+**Errors** 404 Not Found
 ```
-{ "status": "error", "message": "..." }
+{
+  "status": "error",
+  "message": "not found",
+  "error_code": "NOT_FOUND"
+}
 ```
 
 ---

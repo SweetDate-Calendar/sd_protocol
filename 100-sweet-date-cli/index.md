@@ -8,15 +8,21 @@ has_children: true
 # SweetDate CLI
 
 The **SweetDate CLI** is a developer tool for working with the **SweetDate Implementation Protocol (SDIP)**.  
-It takes the protocol definition (provided as JSON) and generates starter templates for implementing client libraries in different programming languages.
+It takes the protocol definition (provided as JSON) and:
+
+- Generates starter templates for implementing client libraries in different programming languages.
+- Runs automated conformance tests to verify correct protocol behavior.
+
+---
 
 ## Purpose
 
-The SweetDate CLI ensures **secure and consistent implementations** of client libraries by scaffolding a complete set of methods exposed by the **SweetDate Engine**.  
+The SweetDate CLI ensures **secure, consistent, and verifiable implementations** of client libraries.  
 
-For each supported language, the CLI generates a template with all protocol commands (as defined in the SDIP), so developers can focus on implementing the details in their language ecosystem rather than re-designing the interface from scratch.  
+- It scaffolds a complete set of protocol commands for each supported language.
+- It provides a **Universal Conformance Driver** to test that implementations behave exactly as expected.
 
-This guarantees that client libraries across Ruby, Elixir, PHP, and future languages stay aligned with the SweetDate protocol and behave consistently.
+This guarantees that client libraries across Ruby, Elixir, PHP, and future languages stay aligned with the SweetDate protocol — both in **structure** and in **runtime behavior**.
 
 ---
 
@@ -26,18 +32,18 @@ This guarantees that client libraries across Ruby, Elixir, PHP, and future langu
 
 - **Input:** A JSON specification of the SDIP (SweetDate Implementation Protocol).  
 - **Output:** Language-specific scaffolding code (Ruby, Elixir, PHP, …).  
-
+- **Verification:** Optional conformance testing against a live SweetDate instance.
 
 ---
 
 ## Configuration
 
 The CLI reads a configuration file (`sd.config.json`) in the project root.  
-This file defines the protocol location and the output folders for generated code.
+This file defines the protocol location, output folders, and optional test configuration.
 
 **Example:**
 
-```
+```json
 {
   "protocol": "protocol-version-01/protocol.json",
   "targets": {
@@ -47,9 +53,47 @@ This file defines the protocol location and the output folders for generated cod
     "elixir": {
       "output": "out/elixir"
     }
+  },
+  "test": {
+    "base_url": "http://localhost:4000",
+    "implementations": {
+      "ruby": "bin/test-ruby-client",
+      "elixir": "bin/test-elixir-client"
+    }
   }
 }
 ```
+
+---
+
+## Conformance Testing
+
+The CLI includes a **Universal Conformance Driver** that invokes client implementations and verifies they respond correctly to each command defined in the protocol.
+
+### Command
+
+```sh
+sd test <language> [--only=COMMAND] [--trace]
+```
+
+### Example
+
+```sh
+sd test ruby
+sd test elixir --only=TENANTS.GET_LIST
+```
+
+### Expected Behavior
+
+The language-specific implementation must expose a way to:
+- Receive a request (typically via CLI, TCP, or JSON-RPC)
+- Execute the specified protocol command
+- Return the result or error in the expected format
+
+The CLI will:
+- Send a request for each command
+- Validate the structure, data types, and semantic output
+- Mark the test as passed or failed
 
 ---
 
@@ -57,6 +101,7 @@ This file defines the protocol location and the output folders for generated cod
 
 The SweetDate CLI generates code based on the **SweetDate Implementation Protocol (SDIP)**.  
 These definitions are stored as JSON files in the project root, organized by protocol version.
+
 ```
 protocol-version-01/
   ├─ calendars.json
@@ -64,8 +109,10 @@ protocol-version-01/
   ├─ users.json
   └─ events.json
 ```
+
 **Example structure:**
-```
+
+```json
 {
   "TENANTS": {
     "commands": [
@@ -124,5 +171,11 @@ protocol-version-01/
           }
         }
       }
-      ...
+    ]
+  }
+}
 ```
+
+---
+
+Let me know if you'd like a diagram or dedicated page for the **Conformance Test Protocol** as well.
