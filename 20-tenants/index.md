@@ -24,19 +24,17 @@ GET /api/v1/tenants?limit=25&offset=0
 ```
 {
   "status": "ok",
-  "result": {
-    "tenants": [
-      {
-        "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Alpha",
-        "account_id": "acc-123",
-        "inserted_at": "2025-08-18T09:20:00Z",
-        "updated_at": "2025-08-19T10:15:00Z"
-      }
-    ],
-    "limit": 25,
-    "offset": 0
-  }
+  "tenants": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "Alpha",
+      "account_id": "acc-123",
+      "inserted_at": "2025-08-18T09:20:00Z",
+      "updated_at": "2025-08-19T10:15:00Z"
+    }
+  ],
+  "limit": 25,
+  "offset": 0
 }
 ```
 

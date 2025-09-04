@@ -25,19 +25,17 @@ Returns users ordered by name ascending.
 
     {
       "status": "ok",
-      "result": {
-        "users": [
-          {
-            "id": "00000000-0000-0000-0000-000000000000",
-            "name": "Alice Example",
-            "email": "alice@example.com",
-            "inserted_at": "2025-08-18T09:20:00Z",
-            "updated_at": "2025-08-19T10:15:00Z"
-          }
-        ],
-        "limit": 25,
-        "offset": 0
-      }
+      "users": [
+        {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "name": "Alice Example",
+          "email": "alice@example.com",
+          "inserted_at": "2025-08-18T09:20:00Z",
+          "updated_at": "2025-08-19T10:15:00Z"
+        }
+      ],
+      "limit": 25,
+      "offset": 0
     }
 
 **Error**

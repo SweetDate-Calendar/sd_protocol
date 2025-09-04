@@ -24,20 +24,18 @@ GET /api/v1/calendars?limit=25&offset=0
 ```
 {
   "status": "ok",
-  "result": {
-    "calendars": [
-      {
-        "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Work",
-        "color_theme": "red",
-        "visibility": "shared",
-        "inserted_at": "2025-08-18T09:20:00Z",
-        "updated_at": "2025-08-19T10:15:00Z"
-      }
-    ],
-    "limit": 25,
-    "offset": 0
-  }
+  "calendars": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "Work",
+      "color_theme": "red",
+      "visibility": "shared",
+      "inserted_at": "2025-08-18T09:20:00Z",
+      "updated_at": "2025-08-19T10:15:00Z"
+    }
+  ],
+  "limit": 25,
+  "offset": 0
 }
 ```
 
