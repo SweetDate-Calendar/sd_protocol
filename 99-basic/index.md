@@ -184,8 +184,4 @@ Imagine a **layered diagram**:
 +---------------------------------------------------+
 ```
 
-👉 In a more **friendly illustration**:  
-- On the **left side**, little icons of **end users** (person with tennis racket, businessperson, family with suitcase).  
-- In the **middle**, logos/buildings for **businesses** (tennis club, lawyer office, travel agency).  
-- Below them, **web agencies** shown as designers/developers with laptops.  
-- On the **right side**, a **“cloud” labeled SweetDate** connected to the agencies’ work, next to other blocks (payment, email, storage).  
+
