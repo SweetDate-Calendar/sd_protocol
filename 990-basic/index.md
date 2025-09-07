@@ -1,6 +1,6 @@
 ---
 title: Basic 
-nav_order: 1000
+nav_order: 900 
 layout: home
 has_children: true
 ---

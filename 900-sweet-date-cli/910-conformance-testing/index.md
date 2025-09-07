@@ -1,8 +1,8 @@
 ---
 title: Conformance Testing
-nav_order: 120
+nav_order: 910 
 layout: home
-has_children: true
+parent: SweetDate CLI
 ---
 
 # Conformance Testing
@@ -50,23 +50,49 @@ This avoids the risk of **false compliance** caused by incomplete test coverage 
 
 ## Components
 
+The language-specific runner acts like a small harness: it receives test cases from the driver, executes them against the SDK, and reports results back as JSON.
+
 | Component | Description |
 |----------|-------------|
 | **Conformance Driver** | A generic orchestrator that issues standardized test commands and receives test results from the client. |
-| **Language-specific Test Runner** | A program or script (written in Ruby, PHP, Elixir, etc.) that accepts test requests and executes matching scenarios using the actual client implementation. |
+| **Language-specific Test Runner** | A program/script (e.g. `tools/conformance/conformance.php` in the PHP SDK) that accepts test requests and executes matching scenarios using the actual client implementation. |
 | **Protocol Spec** | The source of truth. All test cases are derived from the SDIP JSON files, ensuring alignment across all tooling. |
-| **Result Format** | JSON and writes to the console |
+| **Result Format** | JSON written to stdout, consumable by the driver (pass/fail + payloads). |
 
 ---
 
 ## Example Flow
-
-```mermaid
-sequenceDiagram
-  participant Driver as Conformance Driver
-  participant Impl as Ruby Client (Test Runner)
-
-  Driver->>Impl: { "command": "EVENTS.CREATE", "scenario": "missing start_time" }
-  Impl-->>Driver: { "status": "fail", "error_code": "MISSING_FIELD" }
-  Driver->>Impl: { "command": "EVENTS.DELETE", "scenario": "valid event" }
-  Impl-->>Driver: { "status": "pass" }
+```ascii
++------------------+
+|   CLI Runner     |
+| (conformance.php)|
++------------------+
+         |
+         v
++------------------+
+|  Input JSON file |
+|  (SDIP commands) |
++------------------+
+         |
+         v
++------------------+
+|   PHP SDK        |
+|  - Config        |
+|  - Client        |
+|  - RequestBuilder|
+|  - ResponseGuard |
++------------------+
+         |
+         v
++---------------------------+
+| SweetDate REST API Engine |
+|   (http://localhost:4008) |
++---------------------------+
+         |
+         v
++------------------+
+| Output JSON file |
+| (results: pass,  |
+| fail, payloads)  |
++------------------+
+```
