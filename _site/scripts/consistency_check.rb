@@ -19,7 +19,7 @@ rescue
 end
 
 def check_file(path, errors)
-  puts "Checking:  #{path}"
+  puts "Checking: #{path}"
   content = File.read(path)
 
   frontmatter = read_frontmatter(path)

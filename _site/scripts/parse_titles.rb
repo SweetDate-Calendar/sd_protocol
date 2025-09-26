@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require "yaml"
+require "json"
 
 ROOT = File.expand_path("..", __dir__)
 DOCS = Dir.glob("#{ROOT}/**/*.md")
@@ -22,19 +23,37 @@ DOCS.each do |path|
   puts "  title   = #{title.inspect}"
   puts "  heading = #{heading.inspect}"
 
-  # Detect commands (## or ### sections, uppercase only)
-  commands = content.scan(/^##+\s+([A-Z0-9 ]+)$/).map do |m|
-    # Normalize spaces to underscores
-    m.first.strip.gsub(/\s+/, "_")
-  end
-
-  # Omit commands that start with a number (e.g., 404, 422)
-  commands.reject! { |cmd| cmd =~ /^\d/ }
+  # Detect commands
+  commands = content.scan(/^##+\s+([A-Z][A-Z0-9_ ]*)$/)
+  commands.reject! { |cmd| cmd.first =~ /^\d/ }
 
   if commands.any?
     puts "  commands:"
     commands.each do |cmd|
-      puts "    - #{cmd}"
+      name = cmd.first.strip
+      puts "    - #{name}"
+
+      # Slice content for this command until the next ###
+      section_pattern = /^##+\s+#{Regexp.escape(name)}.*?(?=^##+|\z)/m
+      section = content[section_pattern]
+
+      if section
+        # Extract **Request** block
+        request_block = section[/\*\*Request\*\*.*?```(.*?)```/m, 1]
+        request_block&.strip!
+        puts "      request: #{request_block.inspect}" if request_block
+
+        # Extract **Response** block
+        response_block = section[/\*\*Response\*\*.*?```json\s*(.*?)```/m, 1]
+        if response_block
+          begin
+            json = JSON.parse(response_block)
+            puts "      response: #{JSON.pretty_generate(json).gsub("\n", "\n        ")}"
+          rescue JSON::ParserError
+            puts "      response: INVALID JSON"
+          end
+        end
+      end
     end
   else
     puts "  commands: (none found)"
