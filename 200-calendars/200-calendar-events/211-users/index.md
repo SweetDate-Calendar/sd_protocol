@@ -31,7 +31,7 @@ All routes are scoped under:
 
 ---
 
-## LIST USERS
+### LIST USERS
 Returns users associated with an event.
 
 **Request**
@@ -58,7 +58,7 @@ GET /api/v1/join/events/:events_id/users?limit=25&offset=0&q=alice
 
 ---
 
-## CREATE USER
+### CREATE USER
 
 Associates a user with an event.
 
@@ -91,7 +91,7 @@ POST /api/v1/join/events/:events_id/users
 
 ---
 
-## GET USER
+### GET USER
 
 Fetch a specific user associated with an event.
 
@@ -117,7 +117,7 @@ GET /api/v1/join/events/:events_id/users/:id
 
 ---
 
-## UPDATE USER
+### UPDATE USER
 
 Updates the role of a user within the event.
 
@@ -149,7 +149,7 @@ PUT /api/v1/join/events/:events_id/users/:id
 
 ---
 
-## DELETE USER
+### DELETE USER
 
 Removes the association between the user and the event.
 

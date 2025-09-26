@@ -41,7 +41,7 @@ Some fields only allow selected values
 
 ---
 
-## LIST EVENTS
+### LIST EVENTS
 
 Returns events associated with a calendar.
 
@@ -99,7 +99,7 @@ GET /api/v1/calendars/:calendar_id/events?limit=25&offset=0&q=meeting
 
 ---
 
-## CREATE EVENT
+### CREATE EVENT
 
 Associates an event with a calendar.
 
@@ -196,7 +196,7 @@ POST /api/v1/calendars/:calendar_id/events
 
 ---
 
-## GET EVENT
+### GET EVENT
 
 Fetch a specific event associated with a calendar.
 
@@ -252,7 +252,7 @@ GET /api/v1/calendars/:calendar_id/events/:id
 
 ---
 
-## UPDATE EVENT
+### UPDATE EVENT
 
 Updates an event within the calendar.
 
@@ -329,7 +329,7 @@ PUT /api/v1/calendars/:calendar_id/events/:id
 
 ---
 
-## DELETE EVENT
+### DELETE EVENT
 
 Delete the event.
 

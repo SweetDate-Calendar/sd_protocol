@@ -27,7 +27,7 @@ All routes are scoped under:
 
 ---
 
-## LIST INVITATIONS
+### LIST INVITATIONS
 Returns invitations associated with an event.
 
 **Request**
@@ -72,7 +72,7 @@ GET /api/v1/events/:event_id/invitations?limit=25&offset=0&q=alice
 
 ---
 
-## CREATE INVITATION
+### CREATE INVITATION
 
 Creates an invitation for an event. If `user_id` is provided, the invitation targets an existing user. Otherwise, a token-only invitation is created and the client application is expected to deliver the RSVP link externally.
 
@@ -118,7 +118,7 @@ _or (token-only invitation)_
 
 ---
 
-## GET INVITATION
+### GET INVITATION
 
 Fetch a specific invitation associated with an event.
 
@@ -147,7 +147,7 @@ GET /api/v1/events/:event_id/invitations/:id
 
 ---
 
-## DELETE INVITATION
+### DELETE INVITATION
 
 Deletes an invitation. (If the event is deleted, its invitations are deleted automatically.)
 

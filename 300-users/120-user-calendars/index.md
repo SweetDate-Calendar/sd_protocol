@@ -18,7 +18,7 @@ All routes are scoped under:
 
 ---
 
-## LIST CALENDARS
+### LIST CALENDARS
 Returns calendars associated with a user.
 
 **Request**
@@ -53,7 +53,7 @@ GET /api/v1/users/:user_id/calendars?limit=25&offset=0
 
 ---
 
-## CREATE CALENDAR
+### CREATE CALENDAR
 
 Attach a calendar to a user.
 
@@ -85,7 +85,7 @@ POST /api/v1/users/:user_id/calendars
 
 ---
 
-## GET CALENDAR
+### GET CALENDAR
 
 Get a user calendar association by calendar ID.
 
@@ -111,7 +111,7 @@ GET /api/v1/users/:user_id/calendars/:id
 
 ---
 
-## DELETE CALENDAR
+### DELETE CALENDAR
 
 Delete a user calendar association.
 
