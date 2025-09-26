@@ -6,9 +6,13 @@ nav_order: 1
 
 # SDIP (SweetDate Implementation Protocol) 
 ---
+This document serves as a reference for developers of language specific implementations.
 
-This document describes the methods supported by **SweetDate**  
-It serves as a reference for developers on how to communicate with the engine.  
+The document is not intended for developers that uses the **SweetDate** to implement applications for end users.
+on how to communicate with the engine. 
+
+This document describes the methods supported by **SweetDate** and how to bridge the implementation to the **Rest API**
+ 
 
 **Note:** Currently, only **REST**  endpoint are available.
 
