@@ -19,6 +19,7 @@ rescue
 end
 
 def check_file(path, errors)
+  puts "Checking:  #{path}"
   content = File.read(path)
 
   frontmatter = read_frontmatter(path)
@@ -49,6 +50,7 @@ def check_language_tag(content, path, errors)
   open_lang = nil
   first_code_line = nil
   line_num = 0
+  open_line_num = nil   # ✅ initialize here
 
   content.each_line do |line|
     line_num += 1
@@ -58,7 +60,7 @@ def check_language_tag(content, path, errors)
         in_code = true
         open_lang = ($1 || "").strip
         first_code_line = nil
-        open_line_num = line_num
+        open_line_num = line_num  # ✅ set on open
       end
     else
       stripped = line.strip
@@ -70,13 +72,14 @@ def check_language_tag(content, path, errors)
           allow_json = first_code_line && (first_code_line.start_with?("{") || first_code_line.start_with?("["))
 
           unless allow_http || allow_json
-            errors << "#{path}: Found code block without language tag (opened at line #{open_line_num})"
+            errors << "#{path}: Found code block without language tag (opened at line #{open_line_num || "?"})"
           end
         end
 
         in_code = false
         open_lang = nil
         first_code_line = nil
+        open_line_num = nil   # ✅ reset on close
       end
     end
   end

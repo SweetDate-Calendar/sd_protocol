@@ -3,12 +3,12 @@ title: Tenants
 nav_order: 100 
 layout: home
 has_children: true
+type: protocol
 ---
 
-# TENANTS
+# Tenants
 
 Tenants are a way to group calendars together. Each **tenant** can have many **calendars**.
-
 
 This page specifies commands for working with tenants.
 Each section shows language-specific SDK calls first (Ruby, PHP, JavaScript, Elixir), followed by the raw REST request/response.

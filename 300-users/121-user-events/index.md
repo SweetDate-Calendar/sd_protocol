@@ -2,10 +2,11 @@
 title: User Events
 nav_order: 121
 layout: home
-parent: Users
+parent: User Events
+type: protocol
 ---
 
-# USER EVENTS — Nested Resource
+# User Events
 
 This page documents the API endpoints for managing **events attached to a specific user** using nested REST routes.
 
@@ -15,7 +16,7 @@ This page documents the API endpoints for managing **events attached to a specif
 **Scope** \
 All routes are scoped under:
 
-```
+```text
 /api/v1/users/:user_id/events
 ```
 

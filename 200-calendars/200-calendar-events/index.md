@@ -4,15 +4,16 @@ nav_order: 210
 layout: home
 parent: Calendars
 has_children: true
+type: protocol
 ---
 
-# EVENTS 
+# Events 
 
 This page documents the API endpoints for managing **events within a specific calendar**.
 
 All routes are scoped under:
 
-```
+```text
 /api/v1/calendars/:calendar_id/events
 ```
 

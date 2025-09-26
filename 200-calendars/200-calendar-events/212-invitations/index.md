@@ -3,9 +3,10 @@ title: Event Inviations
 nav_order: 212
 layout: home
 parent: Calendar Events
+type: protocol
 ---
 
-# EVENT INVITATIONS — Nested Resource
+# Event Inviations
 
 This page documents the API endpoints for managing **invitations within a specific event** using nested REST routes.
 
@@ -20,7 +21,7 @@ Some fields only allow selected values
 **Scope** \
 All routes are scoped under:
 
-```
+```text
 /api/v1/events/:event_id/invitations
 ```
 

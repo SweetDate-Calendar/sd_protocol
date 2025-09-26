@@ -3,9 +3,10 @@ title: Users
 nav_order: 211
 layout: home
 parent: Events
+type: protocol
 ---
 
-# USERS
+# Users
 
 This page documents the API endpoints for managing **users within a specific event**.
 
@@ -24,7 +25,7 @@ Some fields only allow selected values
 **Scope** \
 All routes are scoped under:
 
-```
+```text
 /api/v1/join/events/:events_id/users
 ```
 

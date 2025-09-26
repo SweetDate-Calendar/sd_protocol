@@ -3,9 +3,10 @@ has_children: true
 layout: home
 nav_order: 300 
 title: Users
+type: protocol
 ---
 
-# USERS --- Command Reference
+# Users
 
 This page specifies commands for working with users and their associated
 calendars.\

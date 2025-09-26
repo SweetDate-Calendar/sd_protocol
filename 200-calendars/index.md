@@ -3,9 +3,10 @@ title: Calendars
 nav_order: 200 
 layout: home
 has_children: true
+type: protocol
 ---
 
-# CALENDARS 
+# Calendars 
 
 This page specifies commands for working with calendars.  
 Each section shows **language-specific SDK calls first** (Ruby, PHP, JavaScript, Elixir), followed by the **raw REST request/response**.

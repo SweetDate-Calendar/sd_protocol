@@ -1,17 +1,18 @@
 ---
 title: Users
-nav_order: 100
+nav_order: 210
 layout: home
 parent: Calendars
+type: protocol
 ---
 
-# USERS 
+# Users 
 
 This page documents the API endpoints for managing **users within a specific calendar**.
 
 All routes are scoped under:
 
-```
+```text
 /api/v1/join/calendars/:calendar_id/users
 ```
 

@@ -3,15 +3,16 @@ title: User Calendars
 nav_order: 120 
 layout: home
 parent: Users
+type: protocol
 ---
 
-# USER CALENDARS — Nested Resource
+# User Calendars
 
 This page documents the API endpoints for managing **calendars attached to a specific user** using nested REST routes.
 
 All routes are scoped under:
 
-```
+```text
 /api/v1/users/:user_id/calendars
 ```
 

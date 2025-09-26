@@ -3,6 +3,7 @@ title: Users
 nav_order: 100 
 layout: home
 parent: Tenants
+type: protocol
 ---
 
 # Users 
