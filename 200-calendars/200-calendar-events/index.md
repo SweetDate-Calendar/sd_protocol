@@ -7,7 +7,7 @@ has_children: true
 type: protocol
 ---
 
-# Events 
+# Events
 
 This page documents the API endpoints for managing **events within a specific calendar**.
 
@@ -41,7 +41,7 @@ Some fields only allow selected values
 
 ---
 
-### LIST EVENTS
+### LIST
 
 Returns events associated with a calendar.
 
@@ -84,14 +84,21 @@ GET /api/v1/calendars/:calendar_id/events?limit=25&offset=0&q=meeting
   "status": "ok",
   "events": [
     {
-      "id": "00000000-0000-0000-0000-000000000000",
-      "title": "Sprint Planning",
-      "starts_at": "2025-08-21T09:00:00Z",
-      "ends_at": "2025-08-21T10:00:00Z",
-      "location": "Room A",
-      "status": "confirmed",
-      "inserted_at": "2025-08-18T09:20:00Z",
-      "updated_at": "2025-08-19T10:15:00Z"
+      "event": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "status": "scheduled",
+        "name": "Planning",
+        "description": "Q3 planning session",
+        "color_theme": "default",
+        "visibility": "busy",
+        "location": "Zoom",
+        "start_time": "2025-08-22T13:00:00Z",
+        "end_time": "2025-08-22T14:00:00Z",
+        "recurrence_rule": "none",
+        "all_day": false,
+        "inserted_at": "2025-08-18T09:20:00Z",
+        "updated_at": "2025-08-19T10:15:00Z"
+      }
     }
   ]
 }
@@ -99,63 +106,63 @@ GET /api/v1/calendars/:calendar_id/events?limit=25&offset=0&q=meeting
 
 ---
 
-### CREATE EVENT
+### CREATE
+Create an event on a calendar.
 
-Associates an event with a calendar.
+> Permitted values for `status`:  
+> - **scheduled** · **cancelled** · **postponed** · **completed**  
+>
+> Permitted values for `visibility`:  
+> - **private** · **public** · **busy**  
+>
+> Permitted values for `recurrence_rule`:  
+> - **none** · **daily** · **weekly** · **monthly** · **yearly**  
 
 *Ruby*
 ```ruby
-calendar = SD::Calendar.get("CALENDAR-ID")
-event = calendar.create_event(
-  title: "Sprint Planning",
-  starts_at: "2025-08-21T09:00:00Z",
-  ends_at: "2025-08-21T10:00:00Z",
-  location: "Room A",
-  description: "Quarterly planning session",
-  status: :tentative
-)
+SD::Calendars.create_event("CALENDAR-ID", name: "Planning", description: "Q3 planning session", status: :scheduled, visibility: :busy, location: "Zoom", start_time: "2025-08-22T13:00:00Z", end_time: "2025-08-22T14:00:00Z")
 ```
 
 *PHP*
 ```php
 <?php
-$calendar = \SweetDate\Calendar::get("CALENDAR-ID");
-$event = $calendar->createEvent([
-  "title" => "Sprint Planning",
-  "starts_at" => "2025-08-21T09:00:00Z",
-  "ends_at" => "2025-08-21T10:00:00Z",
-  "location" => "Room A",
-  "description" => "Quarterly planning session",
-  "status" => "tentative"
+$event = \SweetDate\Calendars::createEvent("CALENDAR-ID", [
+  "name" => "Planning",
+  "description" => "Q3 planning session",
+  "status" => "scheduled",
+  "visibility" => "busy",
+  "location" => "Zoom",
+  "start_time" => "2025-08-22T13:00:00Z",
+  "end_time" => "2025-08-22T14:00:00Z"
 ]);
 print_r($event);
 ```
 
 *JavaScript*
 ```javascript
-const calendar = await SD.Calendar.get("CALENDAR-ID");
-const event = await calendar.createEvent({
-  title: "Sprint Planning",
-  starts_at: "2025-08-21T09:00:00Z",
-  ends_at: "2025-08-21T10:00:00Z",
-  location: "Room A",
-  description: "Quarterly planning session",
-  status: "tentative"
+const event = await SD.Calendars.createEvent("CALENDAR-ID", {
+  name: "Planning",
+  description: "Q3 planning session",
+  status: "scheduled",
+  visibility: "busy",
+  location: "Zoom",
+  start_time: "2025-08-22T13:00:00Z",
+  end_time: "2025-08-22T14:00:00Z"
 });
 console.log(event);
 ```
 
 *Elixir*
 ```elixir
-{:ok, calendar} = SD.Calendar.get("CALENDAR-ID")
 {:ok, event} =
-  SD.Calendar.create_event(calendar, %{
-    title: "Sprint Planning",
-    starts_at: "2025-08-21T09:00:00Z",
-    ends_at: "2025-08-21T10:00:00Z",
-    location: "Room A",
-    description: "Quarterly planning session",
-    status: :tentative
+  SD.Calendars.create_event("CALENDAR-ID", %{
+    name: "Planning",
+    description: "Q3 planning session",
+    status: :scheduled,
+    visibility: :busy,
+    location: "Zoom",
+    start_time: "2025-08-22T13:00:00Z",
+    end_time: "2025-08-22T14:00:00Z"
   })
 IO.inspect(event)
 ```
@@ -163,16 +170,17 @@ IO.inspect(event)
 **Request**
 ```
 POST /api/v1/calendars/:calendar_id/events
-```
-**Payload**
-```json
 {
-  "title": "Sprint Planning",
-  "starts_at": "2025-08-21T09:00:00Z",
-  "ends_at": "2025-08-21T10:00:00Z",
-  "location": "Room A",
-  "description": "Quarterly planning session",
-  "status": "tentative"
+  "name": "Planning",
+  "description": "Q3 planning session",
+  "status": "scheduled",
+  "visibility": "busy",
+  "color_theme": "default",
+  "location": "Zoom",
+  "start_time": "2025-08-22T13:00:00Z",
+  "end_time": "2025-08-22T14:00:00Z",
+  "recurrence_rule": "none",
+  "all_day": false
 }
 ```
 
@@ -182,49 +190,53 @@ POST /api/v1/calendars/:calendar_id/events
   "status": "ok",
   "event": {
     "id": "00000000-0000-0000-0000-000000000000",
-    "title": "Sprint Planning",
-    "starts_at": "2025-08-21T09:00:00Z",
-    "ends_at": "2025-08-21T10:00:00Z",
-    "location": "Room A",
-    "description": "Quarterly planning session",
-    "status": "tentative",
+    "name": "Planning",
+    "description": "Q3 planning session",
+    "status": "scheduled",
+    "visibility": "busy",
+    "color_theme": "default",
+    "location": "Zoom",
+    "start_time": "2025-08-22T13:00:00Z",
+    "end_time": "2025-08-22T14:00:00Z",
+    "recurrence_rule": "none",
+    "all_day": false,
     "inserted_at": "2025-08-18T09:20:00Z",
     "updated_at": "2025-08-19T10:15:00Z"
   }
 }
 ```
 
+**Error**
+```json
+{ "status": "error", "message": "..." }
+```
+
 ---
 
-### GET EVENT
-
-Fetch a specific event associated with a calendar.
+### GET_EVENT
+Get a calendar event by ID.
 
 *Ruby*
 ```ruby
-calendar = SD::Calendar.get("CALENDAR-ID")
-event = calendar.get_event("EVENT-ID")
+SD::Calendars.get_event("CALENDAR-ID", "EVENT-ID")
 ```
 
 *PHP*
 ```php
 <?php
-$calendar = \SweetDate\Calendar::get("CALENDAR-ID");
-$event = $calendar->getEvent("EVENT-ID");
+$event = \SweetDate\Calendars::getEvent("CALENDAR-ID", "EVENT-ID");
 print_r($event);
 ```
 
 *JavaScript*
 ```javascript
-const calendar = await SD.Calendar.get("CALENDAR-ID");
-const event = await calendar.getEvent("EVENT-ID");
+const event = await SD.Calendars.getEvent("CALENDAR-ID", "EVENT-ID");
 console.log(event);
 ```
 
 *Elixir*
 ```elixir
-{:ok, calendar} = SD.Calendar.get("CALENDAR-ID")
-{:ok, event} = SD.Calendar.get_event(calendar, "EVENT-ID")
+{:ok, event} = SD.Calendars.get_event("CALENDAR-ID", "EVENT-ID")
 IO.inspect(event)
 ```
 
@@ -239,74 +251,71 @@ GET /api/v1/calendars/:calendar_id/events/:id
   "status": "ok",
   "event": {
     "id": "00000000-0000-0000-0000-000000000000",
-    "title": "Sprint Planning",
-    "starts_at": "2025-08-21T09:00:00Z",
-    "ends_at": "2025-08-21T10:00:00Z",
-    "location": "Room A",
-    "status": "confirmed",
+    "name": "Planning",
+    "description": "Q3 planning session",
+    "status": "scheduled",
+    "visibility": "busy",
+    "color_theme": "default",
+    "location": "Zoom",
+    "start_time": "2025-08-22T13:00:00Z",
+    "end_time": "2025-08-22T14:00:00Z",
+    "recurrence_rule": "none",
+    "all_day": false,
     "inserted_at": "2025-08-18T09:20:00Z",
     "updated_at": "2025-08-19T10:15:00Z"
   }
 }
 ```
 
+**Error**
+```json
+{ "status": "error", "message": "..." }
+```
+
 ---
 
-### UPDATE EVENT
-
-Updates an event within the calendar.
+### UPDATE
+Update a calendar event.
 
 *Ruby*
 ```ruby
-calendar = SD::Calendar.get("CALENDAR-ID")
-updated = calendar.update_event("EVENT-ID", title: "Sprint Planning (Updated)", status: :confirmed, location: "Room B")
+SD::Calendars.update_event("CALENDAR-ID", "EVENT-ID", status: :cancelled, visibility: :public, name: "Planning (Cancelled)")
 ```
 
 *PHP*
 ```php
 <?php
-$calendar = \SweetDate\Calendar::get("CALENDAR-ID");
-$updated = $calendar->updateEvent("EVENT-ID", [
-  "title" => "Sprint Planning (Updated)",
-  "status" => "confirmed",
-  "location" => "Room B"
+$event = \SweetDate\Calendars::updateEvent("CALENDAR-ID", "EVENT-ID", [
+  "status" => "cancelled",
+  "visibility" => "public",
+  "name" => "Planning (Cancelled)"
 ]);
-print_r($updated);
+print_r($event);
 ```
 
 *JavaScript*
 ```javascript
-const calendar = await SD.Calendar.get("CALENDAR-ID");
-const updated = await calendar.updateEvent("EVENT-ID", {
-  title: "Sprint Planning (Updated)",
-  status: "confirmed",
-  location: "Room B"
+const event = await SD.Calendars.updateEvent("CALENDAR-ID", "EVENT-ID", {
+  status: "cancelled",
+  visibility: "public",
+  name: "Planning (Cancelled)"
 });
-console.log(updated);
+console.log(event);
 ```
 
 *Elixir*
 ```elixir
-{:ok, calendar} = SD.Calendar.get("CALENDAR-ID")
-{:ok, updated} =
-  SD.Calendar.update_event(calendar, "EVENT-ID", %{
-    title: "Sprint Planning (Updated)",
-    status: :confirmed,
-    location: "Room B"
-  })
-IO.inspect(updated)
+{:ok, event} = SD.Calendars.update_event("CALENDAR-ID", "EVENT-ID", %{status: :cancelled, visibility: :public, name: "Planning (Cancelled)"})
+IO.inspect(event)
 ```
 
 **Request**
 ```
 PUT /api/v1/calendars/:calendar_id/events/:id
-```
-**Payload**
-```json
 {
-  "title": "Sprint Planning (Updated)",
-  "status": "confirmed",
-  "location": "Room B"
+  "status": "cancelled",
+  "visibility": "public",
+  "name": "Planning (Cancelled)"
 }
 ```
 
@@ -316,49 +325,54 @@ PUT /api/v1/calendars/:calendar_id/events/:id
   "status": "ok",
   "event": {
     "id": "00000000-0000-0000-0000-000000000000",
-    "title": "Sprint Planning (Updated)",
-    "starts_at": "2025-08-21T09:00:00Z",
-    "ends_at": "2025-08-21T10:00:00Z",
-    "location": "Room B",
-    "status": "confirmed",
+    "name": "Planning (Cancelled)",
+    "description": "Q3 planning session",
+    "status": "cancelled",
+    "visibility": "public",
+    "color_theme": "default",
+    "location": "Zoom",
+    "start_time": "2025-08-22T13:00:00Z",
+    "end_time": "2025-08-22T14:00:00Z",
+    "recurrence_rule": "none",
+    "all_day": false,
     "inserted_at": "2025-08-18T09:20:00Z",
     "updated_at": "2025-08-19T10:15:00Z"
   }
 }
 ```
 
+**Error**
+```json
+{ "status": "error", "message": "..." }
+```
+
 ---
 
-### DELETE EVENT
-
-Delete the event.
+### DELETE
+Delete a calendar event.
 
 *Ruby*
 ```ruby
-calendar = SD::Calendar.get("CALENDAR-ID")
-calendar.delete_event("EVENT-ID")
+SD::Calendars.delete_event("CALENDAR-ID", "EVENT-ID")
 # => { status: "ok" }
 ```
 
 *PHP*
 ```php
 <?php
-$calendar = \SweetDate\Calendar::get("CALENDAR-ID");
-$resp = $calendar->deleteEvent("EVENT-ID");
+$resp = \SweetDate\Calendars::deleteEvent("CALENDAR-ID", "EVENT-ID");
 print_r($resp);
 ```
 
 *JavaScript*
 ```javascript
-const calendar = await SD.Calendar.get("CALENDAR-ID");
-const resp = await calendar.deleteEvent("EVENT-ID");
+const resp = await SD.Calendars.deleteEvent("CALENDAR-ID", "EVENT-ID");
 console.log(resp);
 ```
 
 *Elixir*
 ```elixir
-{:ok, calendar} = SD.Calendar.get("CALENDAR-ID")
-:ok = SD.Calendar.delete_event(calendar, "EVENT-ID")
+:ok = SD.Calendars.delete_event("CALENDAR-ID", "EVENT-ID")
 ```
 
 **Request**
@@ -371,28 +385,7 @@ DELETE /api/v1/calendars/:calendar_id/events/:id
 { "status": "ok" }
 ```
 
----
-
-## Errors
-
-### 404 Not Found
+**Error**
 ```json
-{
-  "status": "error",
-  "message": "not found",
-  "error_code": "NOT_FOUND"
-}
-```
-
-### 422 Validation Error
-```json
-{
-  "status": "error",
-  "message": "invalid input",
-  "error_code": "VALIDATION_ERROR",
-  "fields": {
-    "starts_at": ["can't be blank"],
-    "ends_at": ["must be after starts_at"]
-  }
-}
+{ "status": "error", "message": "..." }
 ```

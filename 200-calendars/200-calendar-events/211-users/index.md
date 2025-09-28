@@ -10,17 +10,13 @@ type: protocol
 
 This page documents the API endpoints for managing **users within a specific event**.
 
-
-
 **Enums** \
 Some fields only allow selected values
-
 
 | Field           | Allowed values                          | Default   |
 |-----------------|-----------------------------------------|-----------|
 | role          | organizer, attendee, guest | attendee |
 | status      | invited, accepted, declined, maybe, cancelled | invited    |
-
 
 **Scope** \
 All routes are scoped under:
@@ -31,8 +27,32 @@ All routes are scoped under:
 
 ---
 
-### LIST USERS
+### LIST
 Returns users associated with an event.
+
+**DSL**
+
+*Ruby*
+```ruby
+users = SD::EventUser.list("EVENT-ID", limit: 25, offset: 0, q: "alice")
+```
+
+*PHP*
+```php
+<?php
+$users = \SweetDate\EventUser::list("EVENT-ID", 25, 0, "alice");
+print_r($users);
+```
+*JavaScript*
+```javascript
+const users = await SD.EventUser.list("EVENT-ID", { limit: 25, offset: 0, q: "alice" });
+console.log(users);
+```
+*Elixir*
+```elixir
+{:ok, users} = SD.EventUser.list("EVENT-ID", limit: 25, offset: 0, q: "alice")
+IO.inspect(users)
+```
 
 **Request**
 ```
@@ -58,9 +78,35 @@ GET /api/v1/join/events/:events_id/users?limit=25&offset=0&q=alice
 
 ---
 
-### CREATE USER
+### CREATE
 
 Associates a user with an event.
+
+**DSL**
+
+*Ruby*
+```ruby
+user = SD::EventUser.create("EVENT-ID", user_id: "USER-ID", role: :admin)
+```
+*PHP*
+```php
+<?php
+$user = \SweetDate\EventUser::create("EVENT-ID", [
+  "user_id" => "USER-ID",
+  "role" => "admin"
+]);
+print_r($user);
+```
+*JavaScript*
+```javascript
+const user = await SD.EventUser.create("EVENT-ID", { user_id: "USER-ID", role: "admin" });
+console.log(user);
+```
+*Elixir*
+```elixir
+{:ok, user} = SD.EventUser.create("EVENT-ID", %{user_id: "USER-ID", role: :admin})
+IO.inspect(user)
+```
 
 **Request**
 ```
@@ -91,9 +137,32 @@ POST /api/v1/join/events/:events_id/users
 
 ---
 
-### GET USER
+### GET
 
 Fetch a specific user associated with an event.
+
+**DSL**
+
+*Ruby*
+```ruby
+user = SD::EventUser.get("EVENT-ID", "USER-ID")
+```
+*PHP*
+```php
+<?php
+$user = \SweetDate\EventUser::get("EVENT-ID", "USER-ID");
+print_r($user);
+```
+*JavaScript*
+```javascript
+const user = await SD.EventUser.get("EVENT-ID", "USER-ID");
+console.log(user);
+```
+*Elixir*
+```elixir
+{:ok, user} = SD.EventUser.get("EVENT-ID", "USER-ID")
+IO.inspect(user)
+```
 
 **Request**
 ```
@@ -117,9 +186,32 @@ GET /api/v1/join/events/:events_id/users/:id
 
 ---
 
-### UPDATE USER
+### UPDATE
 
 Updates the role of a user within the event.
+
+**DSL**
+
+*Ruby*
+```ruby
+user = SD::EventUser.update("EVENT-ID", "USER-ID", role: :guest)
+```
+*PHP*
+```php
+<?php
+$user = \SweetDate\EventUser::update("EVENT-ID", "USER-ID", ["role" => "guest"]);
+print_r($user);
+```
+*JavaScript*
+```javascript
+const user = await SD.EventUser.update("EVENT-ID", "USER-ID", { role: "guest" });
+console.log(user);
+```
+*Elixir*
+```elixir
+{:ok, user} = SD.EventUser.update("EVENT-ID", "USER-ID", %{role: :guest})
+IO.inspect(user)
+```
 
 **Request**
 ```
@@ -149,9 +241,31 @@ PUT /api/v1/join/events/:events_id/users/:id
 
 ---
 
-### DELETE USER
+### DELETE
 
 Removes the association between the user and the event.
+
+**DSL**
+
+*Ruby*
+```ruby
+SD::EventUser.delete("EVENT-ID", "USER-ID")
+```
+*PHP*
+```php
+<?php
+$resp = \SweetDate\EventUser::delete("EVENT-ID", "USER-ID");
+print_r($resp);
+```
+*JavaScript*
+```javascript
+const resp = await SD.EventUser.delete("EVENT-ID", "USER-ID");
+console.log(resp);
+```
+*Elixir*
+```elixir
+:ok = SD.EventUser.delete("EVENT-ID", "USER-ID")
+```
 
 **Request**
 ```

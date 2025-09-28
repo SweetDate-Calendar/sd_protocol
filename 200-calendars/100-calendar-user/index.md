@@ -6,7 +6,7 @@ parent: Calendars
 type: protocol
 ---
 
-# Users 
+# Users
 
 This page documents the API endpoints for managing **users within a specific calendar**.
 
@@ -29,7 +29,7 @@ All routes are scoped under:
 
 ---
 
-## USERS
+## LIST 
 Returns users associated with a calendar.
 
 *Ruby*

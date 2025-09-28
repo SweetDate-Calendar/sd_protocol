@@ -19,30 +19,34 @@ rescue
 end
 
 def check_file(path, errors)
-  puts "Checking: #{path}"
   content = File.read(path)
 
   frontmatter = read_frontmatter(path)
   return unless frontmatter["type"] == "protocol"
-
+  puts "Checking: #{path}"
+  
   lines = content.lines
   title = frontmatter["title"]
 
   first_heading = lines.find { |l| l.start_with?("# ") }
   if first_heading.nil?
     errors << "#{path}: Missing top-level heading"
-  elsif first_heading.strip != "# #{title}"
-    errors << "#{path}: First heading does not match frontmatter title"
+  elsif first_heading != "# #{title}\n"
+    errors << "#{path}: First heading must exactly match frontmatter title (no extra spaces, got: #{first_heading.strip.inspect})"
   end
 
-  %w[Request Response].each do |section|
+  # Allow either Response or Error blocks
+  %w[Request Response Error].each do |section|
     unless content.match?(/^\*\*#{section}\*\*/)
-      errors << "#{path}: Missing section '#{section}'"
+      if section != "Error" # only enforce Request/Response, Error optional
+        errors << "#{path}: Missing section '#{section}'"
+      end
     end
   end
 
   check_language_tag(content, path, errors)
   validate_json_blocks(content, path, errors)
+  check_dsl_sections(content, path, errors)  # ✅ enforce DSL blocks
 end
 
 def check_language_tag(content, path, errors)
@@ -50,7 +54,7 @@ def check_language_tag(content, path, errors)
   open_lang = nil
   first_code_line = nil
   line_num = 0
-  open_line_num = nil   # ✅ initialize here
+  open_line_num = nil
 
   content.each_line do |line|
     line_num += 1
@@ -60,7 +64,7 @@ def check_language_tag(content, path, errors)
         in_code = true
         open_lang = ($1 || "").strip
         first_code_line = nil
-        open_line_num = line_num  # ✅ set on open
+        open_line_num = line_num
       end
     else
       stripped = line.strip
@@ -79,7 +83,7 @@ def check_language_tag(content, path, errors)
         in_code = false
         open_lang = nil
         first_code_line = nil
-        open_line_num = nil   # ✅ reset on close
+        open_line_num = nil
       end
     end
   end
@@ -96,7 +100,7 @@ def validate_json_blocks(content, path, errors)
 
     if !in_json && line =~ /^\s*```json\s*$/
       in_json = true
-      buffer = String.new   # ✅ mutable string
+      buffer = String.new   # ✅ always mutable
       start_line = line_num
     elsif in_json && line =~ /^\s*```\s*$/
       begin
@@ -109,6 +113,47 @@ def validate_json_blocks(content, path, errors)
     elsif in_json
       buffer << line
     end
+  end
+end
+
+def check_dsl_sections(content, path, errors)
+  lines = content.lines
+  in_errors_section = false
+  current_heading = nil
+  section_buffer = []
+
+  lines.each do |line|
+    if line =~ /^##\s+Errors/i
+      in_errors_section = true
+      next
+    end
+
+    if line =~ /^##\s/  # next top-level section after Errors
+      in_errors_section = false
+    end
+
+    if line =~ /^###\s+(.+)$/
+      # check previous heading
+      if current_heading && !in_errors_section
+        check_for_dsl_block(current_heading, section_buffer, path, errors)
+      end
+      current_heading = $1.strip
+      section_buffer = []
+    else
+      section_buffer << line
+    end
+  end
+
+  # flush last section
+  if current_heading && !in_errors_section
+    check_for_dsl_block(current_heading, section_buffer, path, errors)
+  end
+end
+
+def check_for_dsl_block(heading, section_buffer, path, errors)
+  return if heading =~ /^[0-9]{3}/  # skip "### 404 Not Found", etc.
+  unless section_buffer.join.include?("**DSL**")
+    errors << "#{path}: Section '### #{heading}' is missing a DSL block"
   end
 end
 

@@ -1,22 +1,22 @@
 ---
-title: Event Inviations
+title: Invitations
 nav_order: 212
 layout: home
-parent: Calendar Events
+parent: Events
 type: protocol
 ---
 
-# Event Inviations
+# Invitations
 
 This page documents the API endpoints for managing **invitations within a specific event** using nested REST routes.
 
 **Enums** \
 Some fields only allow selected values
 
-| Field   | Allowed values                                      | Default  |
-|---------|------------------------------------------------------|----------|
+| Field   | Allowed values                                        | Default  |
+|---------|--------------------------------------------------------|----------|
 | status  | pending, accepted, declined, maybe, cancelled, expired | pending  |
-| role    | organizer, attendee, guest                           | attendee |
+| role    | organizer, attendee, guest                             | attendee |
 
 **Scope** \
 All routes are scoped under:
@@ -27,7 +27,7 @@ All routes are scoped under:
 
 ---
 
-### LIST INVITATIONS
+### LIST
 Returns invitations associated with an event.
 
 **Request**
@@ -72,7 +72,7 @@ GET /api/v1/events/:event_id/invitations?limit=25&offset=0&q=alice
 
 ---
 
-### CREATE INVITATION
+### CREATE
 
 Creates an invitation for an event. If `user_id` is provided, the invitation targets an existing user. Otherwise, a token-only invitation is created and the client application is expected to deliver the RSVP link externally.
 
@@ -80,6 +80,7 @@ Creates an invitation for an event. If `user_id` is provided, the invitation tar
 ```
 POST /api/v1/events/:event_id/invitations
 ```
+
 **Payload**
 ```json
 {
@@ -87,10 +88,13 @@ POST /api/v1/events/:event_id/invitations
   "user_id": "00000000-0000-0000-0000-000000000999"
 }
 ```
+
 _or (token-only invitation)_
+
 ```json
 {
-  "role": "attendee"
+  "role": "attendee",
+  "email": "alice@example.com"
 }
 ```
 
@@ -104,7 +108,6 @@ _or (token-only invitation)_
     "role": "attendee",
     "token": "XYZ123TOKEN",
     "expires_at": "2025-09-01T10:00:00Z",
-    "email_display": null,
     "user": {
       "id": "00000000-0000-0000-0000-000000000999",
       "name": "Alice",
@@ -118,7 +121,7 @@ _or (token-only invitation)_
 
 ---
 
-### GET INVITATION
+### GET
 
 Fetch a specific invitation associated with an event.
 
@@ -137,7 +140,6 @@ GET /api/v1/events/:event_id/invitations/:id
     "role": "attendee",
     "token": "XYZ123TOKEN",
     "expires_at": "2025-09-01T10:00:00Z",
-    "email_display": "a***@example.com",
     "user": null,
     "inserted_at": "2025-08-18T09:20:00Z",
     "updated_at": "2025-08-19T10:15:00Z"
@@ -147,7 +149,56 @@ GET /api/v1/events/:event_id/invitations/:id
 
 ---
 
-### DELETE INVITATION
+### UPDATE
+Update the status or role of an invitation.
+
+**Permitted Parameters**  
+Only the following fields can be updated:
+
+- **status** – `pending`, `accepted`, `declined`, `maybe`, `cancelled`, `expired`  
+- **role** – `organizer`, `attendee`, `guest`  
+- **expires_at** – ISO8601 datetime string  
+
+⚠️ Immutable fields such as `user_id`, `event_id`, and `token` cannot be changed.
+
+**Request**
+```
+PUT /api/v1/events/:event_id/invitations/:id
+```
+
+**Payload**
+```json
+{
+  "status": "accepted",
+  "role": "guest"
+}
+```
+
+**Response**
+```json
+{
+  "status": "ok",
+  "invitation": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "status": "accepted",
+    "role": "guest",
+    "token": null,
+    "expires_at": "2025-09-01T10:00:00Z",
+    "email_display": null,
+    "user": {
+      "id": "00000000-0000-0000-0000-000000000999",
+      "name": "Alice",
+      "email": "alice@example.com"
+    },
+    "inserted_at": "2025-08-18T09:20:00Z",
+    "updated_at": "2025-08-19T10:20:00Z"
+  }
+}
+```
+
+---
+
+### DELETE
 
 Deletes an invitation. (If the event is deleted, its invitations are deleted automatically.)
 

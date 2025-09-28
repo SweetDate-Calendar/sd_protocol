@@ -6,20 +6,22 @@ parent: Tenants
 type: protocol
 ---
 
-# Users 
+# Users
 
 This page specifies commands for working with users for a given tenant.  
 Each section shows **language-specific SDK calls first** (Ruby, PHP, JavaScript, Elixir), followed by the **raw REST request/response**.
 
 ---
 
-### USERS
+### LIST 
 List all tenant users.
 
 > Optional query params:  
 > - **limit** – Maximum number of users to return (default: 25)  
 > - **offset** – Number of users to skip before starting to return results (default: 0)  
 > - **q** – Search term (matches against user name or email)  
+
+**DSL**
 
 *Ruby*
 ```ruby
@@ -93,6 +95,8 @@ Create a tenant–user association.
 > - **owner** – Create, Show, Update, Delete **tenant** and **calendar**
 > - **admin** – Create, Show, Update, Delete **calendar**  
 > - **guest** – Show  **calendar**
+
+**DSL**
 
 *Ruby*
 ```ruby
@@ -175,6 +179,8 @@ POST /api/v1/tenants/:tenant_id/users
 ### GET
 Get a tenant user by ID.
 
+**DSL**
+
 *Ruby*
 ```ruby
 SD::TenantUsers.get("TENANT-ID", "USER-ID")
@@ -233,6 +239,8 @@ GET /api/v1/tenants/:tenant_id/users/:id
 
 ### UPDATE
 Update a tenant user.
+
+**DSL**
 
 *Ruby*
 ```ruby
@@ -304,8 +312,10 @@ PUT /api/v1/tenants/:tenant_id/users/:id
 
 ---
 
-### USER
+### DELETE
 Delete a tenant user.
+
+**DSL**
 
 *Ruby*
 ```ruby

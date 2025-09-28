@@ -20,7 +20,7 @@ Each section shows language-specific SDK calls first (Ruby, PHP, JavaScript, Eli
 
 ---
 
-## LIST_TENANTS
+## LIST
 Returns tenants ordered by name ascending.
 
 *Ruby*

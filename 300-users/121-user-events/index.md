@@ -1,12 +1,12 @@
 ---
-title: User Events
+title: Events
 nav_order: 121
 layout: home
 parent: User Events
 type: protocol
 ---
 
-# User Events
+# Events
 
 This page documents the API endpoints for managing **events attached to a specific user** using nested REST routes.
 
@@ -22,7 +22,7 @@ All routes are scoped under:
 
 ---
 
-## LIST EVENTS
+## LIST
 Returns events associated with a user.
 
 **Request**
@@ -71,7 +71,7 @@ GET /api/v1/users/:user_id/events?limit=25&offset=0
 
 ---
 
-## GET EVENT
+## GET
 
 Get a user event association by event ID.
 
@@ -104,7 +104,7 @@ GET /api/v1/users/:user_id/events/:id
 
 ---
 
-## DELETE EVENT
+## DELETE
 
 Delete a user event association.
 

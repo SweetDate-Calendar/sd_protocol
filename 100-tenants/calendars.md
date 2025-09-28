@@ -6,20 +6,22 @@ parent: Tenants
 type: protocol
 ---
 
-# Calendars 
+# Calendars
 
 This page specifies commands for working with calendars for a given tenant.  
 Each section shows **language-specific SDK calls first** (Ruby, PHP, JavaScript, Elixir), followed by the **raw REST request/response**.
 
 ---
 
-### CALENDARS
+### LIST 
 List all calendars attached to a tenant.
 
 > Optional query params:
 > - **limit** – Maximum number of calendars to return (default: 25)  
 > - **offset** – Number of calendars to skip before starting to return results (default: 0)  
 > - **q** – Search term (matches against calendar name)  
+
+**DSL**
 
 *Ruby*
 ```ruby
@@ -76,7 +78,7 @@ GET /api/v1/tenants/:tenant_id/calendars
 }
 ```
 
-**Errors** 404 Not Found
+**Error** 404 Not Found
 ```json
 {
   "status": "error",
@@ -94,6 +96,8 @@ Attach a calendar to a tenant.
 > - **shared** – Shared with selected users  
 > - **public** – Discoverable within the tenant  
 > - **unlisted** – Hidden from discovery, link/ID required  
+
+**DSL**
 
 *Ruby*
 ```ruby
@@ -156,6 +160,8 @@ POST /api/v1/tenants/:tenant_id/calendars
 ### GET
 Get a tenant calendar by ID, including its associated users.
 
+**DSL**
+
 *Ruby*
 ```ruby
 SD::TenantCalendars.get("TENANT-ID", "CALENDAR-ID")
@@ -213,6 +219,23 @@ GET /api/v1/tenants/:tenant_id/calendars/:id
         "inserted_at": "2025-08-18T09:20:00Z",
         "updated_at": "2025-08-19T10:15:00Z"
       }
+    ],
+    "events": [
+      {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "status": "scheduled",
+        "name": "Planning",
+        "description": "Q3 planning session",
+        "color_theme": "default",
+        "visibility": "busy",
+        "location": "Zoom",
+        "start_time": "2025-08-22T13:00:00Z",
+        "end_time": "2025-08-22T14:00:00Z",
+        "recurrence_rule": "none",
+        "all_day": false,
+        "inserted_at": "2025-08-18T09:20:00Z",
+        "updated_at": "2025-08-19T10:15:00Z"
+      }
     ]
   }
 }
@@ -227,6 +250,8 @@ GET /api/v1/tenants/:tenant_id/calendars/:id
 
 ### DELETE
 Delete a tenant calendar association.
+
+**DSL**
 
 *Ruby*
 ```ruby

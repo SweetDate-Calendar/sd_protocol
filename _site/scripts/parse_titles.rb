@@ -7,57 +7,96 @@ require "json"
 ROOT = File.expand_path("..", __dir__)
 DOCS = Dir.glob("#{ROOT}/**/*.md")
 
-DOCS.each do |path|
-  content = File.read(path)
-
-  # Grab frontmatter
+def extract_frontmatter(content)
   frontmatter = content[/\A---\n.*?\n---/m]
-  next unless frontmatter
-  meta = YAML.safe_load(frontmatter)
-  next unless meta["type"] == "protocol"
+  return {} unless frontmatter
+  YAML.safe_load(frontmatter) || {}
+end
 
-  title = meta["title"]
-  heading = content[/^# (.+)$/, 1]
+def extract_commands(content)
+  commands = []
+  current = nil
+  in_request = false
+  in_response = false
+  buffer = []
 
-  puts "#{path}:"
-  puts "  title   = #{title.inspect}"
-  puts "  heading = #{heading.inspect}"
-
-  # Detect commands
-  commands = content.scan(/^##+\s+([A-Z][A-Z0-9_ ]*)$/)
-  commands.reject! { |cmd| cmd.first =~ /^\d/ }
-
-  if commands.any?
-    puts "  commands:"
-    commands.each do |cmd|
-      name = cmd.first.strip
-      puts "    - #{name}"
-
-      # Slice content for this command until the next ###
-      section_pattern = /^##+\s+#{Regexp.escape(name)}.*?(?=^##+|\z)/m
-      section = content[section_pattern]
-
-      if section
-        # Extract **Request** block
-        request_block = section[/\*\*Request\*\*.*?```(.*?)```/m, 1]
-        request_block&.strip!
-        puts "      request: #{request_block.inspect}" if request_block
-
-        # Extract **Response** block
-        response_block = section[/\*\*Response\*\*.*?```json\s*(.*?)```/m, 1]
-        if response_block
-          begin
-            json = JSON.parse(response_block)
-            puts "      response: #{JSON.pretty_generate(json).gsub("\n", "\n        ")}"
-          rescue JSON::ParserError
-            puts "      response: INVALID JSON"
-          end
+  content.each_line do |line|
+    if line =~ /^###\s+([A-Z0-9_ ]+)$/
+      # save previous
+      if current
+        if in_response
+          current[:response] = split_response(buffer.join.strip)
+        elsif in_request
+          current[:request] = buffer.join.strip
         end
+        commands << current
       end
+      current = { name: $1.strip.gsub(" ", "_"), request: nil, response: nil }
+      in_request = false
+      in_response = false
+      buffer = []
+    elsif line.strip == "**Request**"
+      in_request = true
+      in_response = false
+      buffer = []
+    elsif line.strip == "**Response**"
+      if in_request && current
+        current[:request] = buffer.join.strip
+      end
+      in_request = false
+      in_response = true
+      buffer = []
+    elsif line =~ /^---$/ && (in_request || in_response)
+      # ignore dividers
+    elsif line =~ /^\s*```/
+      # ignore code block markers
+    else
+      buffer << line if in_request || in_response
     end
-  else
-    puts "  commands: (none found)"
   end
 
-  puts
+  # flush last
+  if current
+    if in_response
+      current[:response] = split_response(buffer.join.strip)
+    elsif in_request
+      current[:request] = buffer.join.strip
+    end
+    commands << current
+  end
+
+  commands
+end
+
+def split_response(text)
+  return nil if text.nil? || text.empty?
+
+  parts = text.split(/\*\*Error\*\*/i).map(&:strip)
+  if parts.size > 1
+    {
+      "ok" => parts.first,
+      "error" => parts[1..].join("\n\n").strip
+    }
+  else
+    { "ok" => text }
+  end
+end
+
+DOCS.each do |path|
+  content = File.read(path)
+  meta = extract_frontmatter(content)
+  next unless meta["type"] == "protocol"
+
+  heading = content[/^# (.+)$/, 1]
+  key = heading.upcase.gsub(" ", "_")
+
+  json = {
+    key => {
+      "commands" => extract_commands(content)
+    }
+  }
+  puts path
+
+  puts JSON.pretty_generate(json)
+  break  # only show first file for now
 end
